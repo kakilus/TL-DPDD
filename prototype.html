@@ -15,7 +15,9 @@
         }
 
         header {
-            background-color: aqua;
+            background-color: aqua;   
+            line-height: 200px;
+            font-size: 80px;
         }
 
         main {
@@ -24,6 +26,8 @@
 
         nav {
             background-color: aquamarine;
+            font-size: 30px;
+            text-align: center;
         }
 
         .logo {
@@ -37,14 +41,27 @@
             width: 250px;
             height: 300px;
             border-radius: 25px;
-
+            position: absolute;
+            top: 30%;
+            left: 50%;
         }
+
+        .img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+
     </style>
 </head>
 <body>
-    <div class="logo"><img src="clash-royale-emote.gif" alt="aaaaaa"></div>
-    <header>header</header>
-    <nav>nav</nav>
+    <div class="logo"><img src="clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
+    <header> header</header>
+    <nav><p>Navigation</p>
+        <a href="index.php">Home</a><br>
+        <a href="stockControl.php">Stock Control</a><br>
+        <a href="admin.php">Admin</a><br>
+    </nav>
     <main>
         <div class="loginBox">
             <p>
