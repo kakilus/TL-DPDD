@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+
+    <link rel="src" href="assets/js/redirect.js">
     <style>
         body {
             display: grid;
@@ -52,6 +54,14 @@
             width: 100%;
         }
 
+        .redirectButton {
+            width: 80%;
+            height: 30px;
+            border-radius: 25px;
+            text-align: center;
+            background-color: lightblue;
+        }
+
     </style>
 </head>
 <body>
@@ -61,6 +71,7 @@
         <a href="prototype.html">Log-In</a><br>
         <a href="stockControl.html">Stock Control</a><br>
         <a href="admin.html">Admin</a><br>
+        <button class="redirectButton" onclick="redirect('admin.html')" id="redirect">Admin</button>
     </nav>
     <main>
         
