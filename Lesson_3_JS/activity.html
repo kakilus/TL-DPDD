@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>ts will change unc 🙏: </p>
+    <p id="intro"></p>
+    <p>press button</p>
+    <button onclick="myFunction()"><img src="img/aura.png" style="height: 50px; width: 50px;"></button>
+    <p id="greting"></p>
+    <input id="taskInput" type="text" placeholder="enter task to add">
+    <button onclick="addList()"><img src="img/click-enter.gif" style="height: 50px; width: 50px;"></button>
+    <p>To do list: </p>
+    <ul id="list">
+        
+    </ul>
+    <script>
+
+        const text = "Welcome to javascript!";
+        
+        addEventListener('load', (event) => {
+            console.log('The page has fully loaded'); 
+            document.getElementById("intro").innerHTML = text;
+        });
+
+        function myFunction() {
+            const name = prompt("wuh yo name cuh?");
+            const greeting = confirm("Would yoiu like grting");
+            if (greeting) {
+                document.getElementById("greting").innerHTML = "welcome to website unc " + name;
+            } else {
+                document.getElementById("greting").innerHTML = "hold yo horses ";
+            }
+            alert("tahnks for plying uncle!!")
+        }
+        
+        const itemList = [];
+        const taskInput = document.getElementById('taskInput');
+        const listElement = document.getElementById('list');
+
+        function addList() {
+
+            const item = taskInput.value.trim();
+            
+            if (item) {
+                itemList.push(item);
+                console.log("item appended");
+                
+                taskInput.value = "";
+                
+                let finalText = "";
+                for (let i = 0; i < itemList.length; i++) {
+                    finalText += "<li>" + itemList[i] + "</li>";
+                }
+                
+                listElement.innerHTML = finalText;
+            }
+        }
+    </script>
+</body>
+</html>

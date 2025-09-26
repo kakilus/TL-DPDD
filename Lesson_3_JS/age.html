@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="name">a</p>
+    <p id="numTest"></p>
+</body>
+</html>
+
+<script>
+    var age = 17;
+    text = "";
+    name = "kuba"
+    while (age != -1)
+        {
+            text += name + "<br>";
+            age = (age - 1);
+            
+        }
+        document.getElementById("name").innerHTML = text;
+
+    var x = 1;
+    ans = "incorrect";
+    while (((x+3)*5) != 50)
+        {
+            text += x + " is " + ans + "<br>"
+            x++
+        }
+        ans = "correct";
+        text += x + " is " + ans + "<br>";
+        document.getElementById("numTest").innerHTML = text;
+</script>

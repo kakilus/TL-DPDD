@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website test</title>
+
+    <style>
+        body {
+            overflow: hidden;
+            background-color: aquamarine;
+        }
+        .container {
+            background-color: aquamarine;
+            grid-auto-columns: 1000px;
+            grid-template-rows: 100px  75px 500px 100px 1fr;
+            display: grid;
+            position: absolute;
+            transform: translate(45%, 0%);
+        }
+
+        .container > div {
+            background-color: rgb(76, 218, 135);
+            text-align: center;
+            border-radius: 10px;
+            
+        }
+
+        .container > main {
+            grid-template-columns: 300px 700px;
+            grid-auto-rows: 500px;
+            border-radius: 10px;
+            display: grid;
+        }
+        .container > main > div {
+            grid-template-columns: 250px;
+            grid-auto-rows: 325px;
+            border-radius: 10px;
+            display: grid;
+        }
+
+        .container > main > div > .loginBox {
+            background-color: rgb(161, 194, 175);
+            text-align: center;
+            border-radius: 10px;
+            align-items: center;
+            transform: translate(10%, 27%);
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div style="background-color: rgb(34, 189, 98)">Header</div>
+        <div style="background-color: rgb(12, 128, 60)">
+            <p>Home</p><p>About</p><p>Services</p><p>Contact</p>
+        </div>
+        <main>
+            <div style="background-color: rgb(34, 189, 98)">
+                <div class="loginBox">
+                    <p>Log-In</p><br>
+		    <label for="user">Enter your username:</label><br>
+		    
+                    <input type="text" name="user" id="user" placeholder="Enter Username"><br>
+
+		    <label for="pass">Enter your password:</label><br>
+                    <input type="password" name="pass" id="pass" placeholder="Enter Password"><br>
+
+	            <button>Log-In</button>
+
+
+                </div>
+            </div>
+            <div style="background-color: rgb(119, 230, 165)"></div>
+        </main>
+        <div style="background-color: rgb(12, 128, 60)">Footer</div>
+    </div>
+</body>
+</html>

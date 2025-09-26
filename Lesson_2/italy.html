@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italy</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            
+        }
+
+        .container > .red {
+            background-color: rgb(207, 39, 52);
+            height: 100vh;
+        }
+        .container > .white {
+            background-color: rgb(255, 255, 255);
+            height: 100vh;
+        }
+        .container > .green {
+            background-color: rgb(0, 147, 68);
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="green"></div>
+        <div class="white"></div>
+        <div class="red"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>columbia</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-rows: 100vh;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            
+        }
+
+        .container > .red {
+            background-color: rgb(175, 30, 42);
+            height: 100vh;
+        }
+        .container > .white {
+            background-color: rgb(3, 0, 158);
+            height: 100vh;
+        }
+        .container > .green {
+            background-color: rgb(255, 251, 20);
+            height: 100vh;
+        }
+
+        .emblem {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 600px;
+            width: 600px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="red"></div>
+        <img src="img/alb.jpg" alt="alb Emblem" class="emblem" />
+    </div>
+</body>
+</html>

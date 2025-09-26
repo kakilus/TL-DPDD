@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+            justify-content: center;
+            line-height: 436px;
+            background-image: linear-gradient(45deg, blue, red);
+        }
+    </style>
+</head>
+<body>
+    <p>CLICK MEEEE</p>
+    <button onclick="factorialFunc()"><img src="img/guy-singing-opera-opera.gif" style="height: 200px; width: 200px;"></button>
+    <script>
+        function factorialFunc() {
+            loop = true;
+            let number = 0;
+            let total = 0;
+            while (loop == true) {
+                    number = prompt("please enter positive number:");
+                    number = parseInt(number, 10);
+                    if (!Number.isInteger(number)) {
+                        alert("Please enter integer")
+                        loop = true;
+                    } else {
+                        console.log("is integer")
+                        loop = false;
+                    }
+            
+                    
+                    
+
+                
+
+                if (number < 0) {
+                    alert("Please enter positive integer")
+                    loop = true;
+                }
+                    
+            }
+            
+            for (i = number; i != 0; i = i -1) {
+                console.log("looped")
+                if (i == number) {
+                    total = i;
+                } else {
+                    total = total * i
+                }
+
+            }
+            alert("The factorial of " + number + " is " + total);
+                
+        }
+    
+        
+    </script>
+</body>
+</html>

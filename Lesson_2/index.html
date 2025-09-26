@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        .maincontainer {
+            grid-template-columns: 100px 1fr 1fr;
+            grid-template-rows: 70vh;
+            display: grid;
+        }
+
+        .maincontainer > main {
+            background: linear-gradient(#e66465, #9198e5);
+            justify-content: center;
+        }
+
+        .img {
+            height: 100%;
+            width: 100%;
+            object-fit: fill;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        .container > header {
+            background: linear-gradient(#e66465, #9198e5);
+            text-align: center;
+            font-size: 75px;
+            line-height: 175px;
+            justify-content: center;
+            grid-template-columns: 1fr;
+            height: 20vh;
+        }
+
+        .container > footer {
+            background: linear-gradient(#e66465, #9198e5);
+            text-align: center;
+            font-size: 75px;
+            justify-content: center;
+            grid-template-columns: 1fr;
+            height: 10vh;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>hello</header>
+        <div class="maincontainer">
+            <main><img src="img/crying-goblin-emote-update-clash-royale-china.gif" alt="mimi hard counter" class="img"></main>
+            <main><img src="img/love-adrian.gif" alt="adrian" class="img"></main>
+            <main><img src="img/goofy-ahh-quandale-dingle.gif" alt="quandale" class="img"></main>
+        </div>
+        <footer>ts is epic</footer>
+    </div>
+</body>
+</html>

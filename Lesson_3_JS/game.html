@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game</title>
+    <style>
+        body {
+            text-align: center;
+            justify-content: center;
+            background-image: linear-gradient(45deg, blue, red);
+        }
+    </style>
+</head>
+<body>
+    <h1>hello gng</h1>
+    <button onclick="startGame()">start game</button>
+    <img src="img/kawai.png" style="height: 50px; width: 50px;">
+    <script>
+        function startGame() {
+            x = prompt("Guess a number:")
+            y = Math.floor(Math.random() * 100) + 1;
+            let msg = "wrong number";
+            while (x != y) {
+                if (x > y) {
+                    alert(msg + ", Lower")
+                } else if (x < y){
+                    alert(msg + ", Higher")
+                }
+                x = prompt("Guess a number:")
+            }
+            msg = "correct number"
+            alert(msg)
+
+            let ans = confirm("play again?")
+            if (ans == true) {
+                startGame()
+            } else {
+                alert("thanks for playing")
+            }
+        }
+
+    </script>
+</body>
+</html>
