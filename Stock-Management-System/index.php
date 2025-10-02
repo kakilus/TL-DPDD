@@ -18,9 +18,9 @@
     <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
     <header> Home page</header>
     <nav><p>Navigation</p>
-        <a href="prototype.html"><button class="redirectButton"  id="redirect">Log-In</button></a>
-        <a href="stockControl.html"><button class="redirectButton"  id="redirect">Stock Control</button></a>
-        <a href="admin.html"><button class="redirectButton"  id="redirect">Admin</button></a>
+        <a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>
+        <a href="stockControl.php"><button class="redirectButton"  id="redirect">Stock Control</button></a>
+        <a href="admin.php"><button class="redirectButton"  id="redirect">Admin</button></a>
             
     </nav>
     <main>
