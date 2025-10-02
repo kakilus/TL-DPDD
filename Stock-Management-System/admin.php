@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+    <?php include("templates/header.php");
+    include("templates/footer.php");
+    include("templates/sidebar.php"); ?>
     <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
     <header> Admin page</header>
     <nav><p>Navigation</p>
@@ -22,4 +25,4 @@
 
 
 </body>
-</html>
+</html> 
