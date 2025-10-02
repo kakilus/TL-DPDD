@@ -8,11 +8,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <?php include("templates/header.php");
-    include("templates/footer.php");
-    include("templates/sidebar.php"); ?>
     <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
-    <header> Admin page</header>
+    <?php include("templates/header.php"); ?>
     <nav><p>Navigation</p>
         <a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>
         <a href="stockControl.php"><button class="redirectButton"  id="redirect">Stock Control</button></a>
