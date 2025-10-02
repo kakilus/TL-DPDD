@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="assets/css/styles.css">
 <?php 
-//if (ca) check what page this is to change title based on the page.
+include("../config.php");
+echo "<header>" . $pageName . "</header>";
 ?>
-<header> Home page</header>

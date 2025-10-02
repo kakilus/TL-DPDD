@@ -10,7 +10,8 @@
 <body>
     
     <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
-    <?php include("templates/header.php");
+    <?php $pageName = "Log-In Page";
+    include("templates/header.php");
     
     //include("templates/footer.php");
     //include("templates/sidebar.php");

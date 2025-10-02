@@ -15,7 +15,8 @@
 
     <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
 
-    <?php include("templates/header.php"); ?>
+    <?php $pageName = "Home Page";
+    include("templates/header.php"); ?>
 
     <nav><p>Navigation</p>
         <a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>
@@ -23,7 +24,7 @@
         <a href="admin.php"><button class="redirectButton"  id="redirect">Admin</button></a>
             
     </nav>
-    
+
     <main>
         
     </main>
