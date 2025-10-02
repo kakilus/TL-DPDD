@@ -9,7 +9,7 @@
     <title>Home</title>
 
     <link rel="src" href="assets/js/redirect.js">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
     <?php include("templates/header.php");
