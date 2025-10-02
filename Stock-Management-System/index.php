@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
+     
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +12,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+    <?php include("templates/header.php");
+    include("templates/footer.php");
+    include("templates/sidebar.php"); ?>
     <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
     <header> Home page</header>
     <nav><p>Navigation</p>
