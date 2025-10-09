@@ -34,11 +34,11 @@
                 echo "Welcome new user.<br>";
                 echo "<p>Log-In</p>
             
-                <input type='text' placeholder='Enter user' id='username'><br><br>
+                <form action='process-login.php' method='post'><input type='text' placeholder='Enter user' id='username'><br><br>
 
                 <input type='password' placeholder='Enter password' id='password'><br><br>
 
-                <button id='submit'>Log-in</button>";
+                <button id='submit'>Log-in</button></form>";
             };
             
             
