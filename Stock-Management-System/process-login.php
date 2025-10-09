@@ -25,16 +25,24 @@ session_start(); ?>
     </nav>
     <main>
         <?php
+            $dsn = "sqlite:my_database.db";
+            $pdo = new PDO($dsn);
+            $stmt = $pdo->query("SELECT id, name, email FROM users WHERE name = ?"); // We usually do not fetch passwords
+            $names = $stmt->fetchAll(PDO::FETCH_ASSOC); // Get all rows as an associative array
 
+            foreach ($names as $name) {
+                $password = $name['password'];
+                echo htmlspecialchars($name) . "<br>";
+                if ($_POST['user'] == $name && $_POST['password'] == $password) {
+                    $user = htmlspecialchars($_POST['user']);
+                    echo "hello " . $user;
+                    $_SESSION['username'] = $user;
+                } else {
+                    echo "invalid login" . "<br><img src='img/clash-royale-emote.gif'>";
+                } 
+            }
 
-
-            if ($_POST['user'] == 'john_pork' && $_POST['password'] == 'password') {
-                $user = htmlspecialchars($_POST['user']);
-                echo "hello " . $user;
-                $_SESSION['username'] = $user;
-            } else {
-                echo "invalid login" . "<br><img src='img/clash-royale-emote.gif'>";
-            } ?>
+            ?>
 
 
     </main>
