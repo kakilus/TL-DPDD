@@ -34,9 +34,9 @@
                 echo "Welcome new user.<br>";
                 echo "<p>Log-In</p>
             
-                <form action='process-login.php' method='post'><input type='text' placeholder='Enter user' id='username'><br><br>
+                <form action='process-login.php' method='post'><input type='text' placeholder='Enter user' name='user'><br><br>
 
-                <input type='password' placeholder='Enter password' id='password'><br><br>
+                <input type='password' placeholder='Enter password' name='password'><br><br>
 
                 <button id='submit'>Log-in</button></form>";
             };
