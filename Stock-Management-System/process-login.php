@@ -30,11 +30,15 @@ session_start(); ?>
             $stmt = $pdo->query("SELECT name, password FROM users");
             $names = $stmt->fetchAll(PDO::FETCH_ASSOC); // Get all rows as an associative array
 
-            $loginSuccess = false; // 1. Add a flag
+            $loginSuccess = false;
 
             if (isset($_POST['user'], $_POST['password'])) {
                 foreach ($names as $name) {
-                    if ($_POST['user'] === $name['name'] && $_POST['password'] === $name['password']) {
+                    // Use password_verify to check hashed password
+                    if (
+                        $_POST['user'] === $name['name'] &&
+                        password_verify($_POST['password'], $name['password'])
+                    ) {
                         $user = htmlspecialchars($_POST['user']);
                         echo "hello " . $user;
                         $_SESSION['username'] = $user;
@@ -46,7 +50,7 @@ session_start(); ?>
                 if (!$loginSuccess) {
                     echo "invalid login" . "<br><img src='assets/images/clash-royale-emote.gif'>";
                 }
-}
+            }
 
             ?>
 

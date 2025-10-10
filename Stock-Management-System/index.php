@@ -27,7 +27,10 @@
     </nav>
 
     <main>
-        
+        <?php
+            if (isset($_SESSION['username'])) {
+                echo "WELCOME BACK " . $_SESSION['username'];
+            } ?>
     </main>
 
 

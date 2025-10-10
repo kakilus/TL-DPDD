@@ -18,7 +18,10 @@
         <a href="admin.php"><button class="redirectButton"  id="redirect">Admin</button></a>
     </nav>
     <main>
-        
+        <?php
+            if (isset($_SESSION['username'])) {
+                echo "WELCOME BACK " . $_SESSION['username'];
+            } ?>
     </main>
 
 

@@ -23,6 +23,7 @@
         <a href="admin.php"><button class="redirectButton"  id="redirect">Admin</button></a>
     </nav>
     <main>
+        
         <div class="loginBox">
             <p>
 
