@@ -27,20 +27,26 @@ session_start(); ?>
         <?php
             $dsn = "sqlite:my_database.db";
             $pdo = new PDO($dsn);
-            $stmt = $pdo->query("SELECT id, name, email FROM users WHERE name = ?"); // We usually do not fetch passwords
+            $stmt = $pdo->query("SELECT name, password FROM users");
             $names = $stmt->fetchAll(PDO::FETCH_ASSOC); // Get all rows as an associative array
 
-            foreach ($names as $name) {
-                $password = $name['password'];
-                echo htmlspecialchars($name) . "<br>";
-                if ($_POST['user'] == $name && $_POST['password'] == $password) {
-                    $user = htmlspecialchars($_POST['user']);
-                    echo "hello " . $user;
-                    $_SESSION['username'] = $user;
-                } else {
-                    echo "invalid login" . "<br><img src='img/clash-royale-emote.gif'>";
-                } 
-            }
+            $loginSuccess = false; // 1. Add a flag
+
+            if (isset($_POST['user'], $_POST['password'])) {
+                foreach ($names as $name) {
+                    if ($_POST['user'] === $name['name'] && $_POST['password'] === $name['password']) {
+                        $user = htmlspecialchars($_POST['user']);
+                        echo "hello " . $user;
+                        $_SESSION['username'] = $user;
+                        $loginSuccess = true;
+                        break;
+                    }
+                }
+
+                if (!$loginSuccess) {
+                    echo "invalid login" . "<br><img src='assets/images/clash-royale-emote.gif'>";
+                }
+}
 
             ?>
 
