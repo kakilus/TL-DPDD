@@ -26,7 +26,7 @@ session_start(); ?>
         <?php
             $dsn = "sqlite:my_database.db";
             $pdo = new PDO($dsn);
-            $stmt = $pdo->query("SELECT name, password FROM users");
+            $stmt = $pdo->query("SELECT name, password, email FROM users");
             $names = $stmt->fetchAll(PDO::FETCH_ASSOC); // Get all rows as an associative array
 
             $loginSuccess = false;
@@ -40,7 +40,9 @@ session_start(); ?>
                     ) {
                         $user = htmlspecialchars($_POST['user']);
                         echo "hello " . $user;
+                        $email = $name['email'];
                         $_SESSION['username'] = $user;
+                        $_SESSION['email'] = $email;
                         $loginSuccess = true;
                         break;
                     }

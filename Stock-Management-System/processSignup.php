@@ -11,6 +11,7 @@ session_start(); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script src='assets/js/emailRegistered.js'></script>
 </head>
 <body>
     <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
@@ -27,18 +28,36 @@ session_start(); ?>
         <?php
             $dsn = "sqlite:my_database.db";
             $pdo = new PDO($dsn);
+            $query = $pdo->query("SELECT email FROM users");
+            $emails = $query->fetchAll(PDO::FETCH_ASSOC);
 
             if (isset($_POST['user'], $_POST['password'], $_POST['email'])) {
                 $name = $_POST['user'];
                 $email = $_POST['email'];
                 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $alreadyExists = false;
+
+                foreach ($emails as $existingEmail) {
+                    if ($email === $existingEmail['email']) {
+                        $alreadyExists = true;
+                        echo "Email already registered. Please use a different email.";
+                        break;
+                    } else {
+                        $alreadyExists = false;
+                    }
+                }
                 
+                if ($alreadyExists == true) {
+                    echo "<script>emailAlert();</script>";
+                    //exit; // Stop further execution
+                } else {
+                    $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
                 
-                $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
+                    $stmt->execute([$name, $email, $password]);
+                    $_SESSION['username'] = $name;
+                    echo "User " . htmlspecialchars($name) . " registered successfully.";
+                }
                 
-                $stmt->execute([$name, $email, $password]);
-                $_SESSION['username'] = $name;
-                echo "User " . htmlspecialchars($name) . " registered successfully.";
             }
             
             ?>
