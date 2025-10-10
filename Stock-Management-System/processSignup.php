@@ -18,7 +18,7 @@ session_start(); ?>
     <?php $pageName = "Admin Page";
     include("templates/header.php"); ?>
     <nav><p>Navigation</p>
-        <a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>
+        
         <a href="stockControl.php"><button class="redirectButton"  id="redirect">Stock Control</button></a>
         <a href="index.php"><button class="redirectButton"  id="redirect">Home</button></a>
         <a href="admin.php"><button class="redirectButton"  id="redirect">Admin</button></a>
@@ -37,7 +37,8 @@ session_start(); ?>
                 $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
                 
                 $stmt->execute([$name, $email, $password]);
-                
+                $_SESSION['username'] = $name;
+                echo "User " . htmlspecialchars($name) . " registered successfully.";
             }
             
             ?>
