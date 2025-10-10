@@ -20,7 +20,11 @@
     include("templates/header.php"); ?>
 
     <nav><p>Navigation</p>
-        <a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>
+        <?php
+        if (isset($_SESSION['username'])) {
+            echo '<a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>';
+        };
+        ?>
         <a href="stockControl.php"><button class="redirectButton"  id="redirect">Stock Control</button></a>
         <a href="admin.php"><button class="redirectButton"  id="redirect">Admin</button></a>
             

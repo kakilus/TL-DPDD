@@ -13,7 +13,11 @@
     <?php $pageName = "Stock Control Page";
     include("templates/header.php"); ?>
     <nav><p>Navigation</p>
-        <a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>
+        <?php
+        if (isset($_SESSION['username'])) {
+            echo '<a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>';
+        };
+        ?>
         <a href="index.php"><button class="redirectButton"  id="redirect">Home</button></a>
         <a href="admin.php"><button class="redirectButton"  id="redirect">Admin</button></a>
     </nav>
