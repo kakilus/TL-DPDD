@@ -13,8 +13,16 @@ body {
         }
 
         main {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            min-height: 100vh;
+            display: grid;
+            align-items: flex-start;
+            justify-content: flex-start;
             background-color: aliceblue;
         }
+
+        
 
         nav {
             background-color: aquamarine;
@@ -62,3 +70,5 @@ body {
             background-color: rgb(18, 27, 161);
             transition: none;
         }
+
+        

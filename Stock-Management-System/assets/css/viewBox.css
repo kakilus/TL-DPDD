@@ -1,0 +1,27 @@
+.viewBox {
+    display: grid;
+    text-align: center;
+    width: 350px;
+    height: 600px;
+    border-radius: 25px;
+    background-image: url("../images/clash-royale-emote.gif"); /* Correct path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    place-items: center;
+    transition: background-color 1s, opacity 0.5s; /* Add opacity transition */
+    border: 2px solid red; /* For debugging */
+    padding: 25px;
+}
+
+.viewBox:hover {
+    opacity: 0.5; /* Lower opacity on hover */
+    background-color: #111222; /* Dark background on hover */
+}
+
+.viewBox:focus,
+.viewBox:active {
+    background-color: rgb(0, 0, 2);
+    transition: none;
+    opacity: 1; /* Restore opacity on focus/active */
+}
