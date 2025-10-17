@@ -2,7 +2,7 @@
     display: grid;
     text-align: center;
     width: 350px;
-    height: 600px;
+    height: 400px;
     border-radius: 25px;
     background-image: url("../images/clash-royale-emote.gif"); /* Correct path */
     background-size: cover;
@@ -10,13 +10,14 @@
     background-position: center;
     place-items: center;
     transition: background-color 1s, opacity 0.5s; /* Add opacity transition */
-    border: 2px solid red; /* For debugging */
     padding: 25px;
+    font-size: 30px;
 }
 
 .viewBox:hover {
-    opacity: 0.5; /* Lower opacity on hover */
+    opacity: 0.3; /* Lower opacity on hover */
     background-color: #111222; /* Dark background on hover */
+    font-size: 50px;
 }
 
 .viewBox:focus,
