@@ -20,9 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderList(list) {
       grid.innerHTML = '';
       list.forEach(p => {
-        
         const id = p.url.replace(/\/+$/, '').split('/').pop();
-        const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+        
+        const sprite = (p.name === 'lickitung')
+          ? 'assets/img/pokemon-pokemon.gif'
+          : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
         const card = document.createElement('a');
         card.className = 'viewBox';
@@ -33,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="card-title">${p.name}</div>
           </div>
         `;
-        
+
         const img = card.querySelector('img');
         img.addEventListener('error', () => { img.style.display = 'none'; });
 
@@ -47,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchList();
   }
 
-  
   if (detail) {
     const params = new URLSearchParams(location.search);
     const name = params.get('name');
@@ -66,10 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderPokemon(p) {
+      
+      const imageSrc = (p.name === 'lickitung') ? 'assets/img/pokemon-pokemon.gif' : (p.sprites.front_default || '');
       detail.innerHTML = `
         <div class="detail-card">
           <h2>${p.name}</h2>
-          <img src="${p.sprites.front_default || ''}" alt="${p.name}">
+          <img src="${imageSrc}" alt="${p.name}">
           <p>Height: ${p.height} | Weight: ${p.weight}</p>
           <p>Types: ${p.types.map(t => t.type.name).join(', ')}</p>
           <p>Abilities: ${p.abilities.map(a => a.ability.name).join(', ')}</p>
