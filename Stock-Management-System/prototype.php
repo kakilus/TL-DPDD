@@ -10,23 +10,9 @@
 </head>
 <body>
     
-    <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
-    <?php $pageName = "Log-In Page";
+    <?php $pageName = "Home Page";
     include("templates/header.php");
-    
-    //include("templates/footer.php");
-    //include("templates/sidebar.php");
-    ?>
-    <nav><p>Navigation</p>
-        <?php
-        if (!isset($_SESSION['username'])) {
-            echo '<a href="signUp.php"><button class="redirectButton"  id="redirect">Sign-Up</button></a>';
-        };
-        ?>
-        <a href="index.php"><button class="redirectButton"  id="redirect">Home</button></a>
-        <a href="stockControl.php"><button class="redirectButton"  id="redirect">Stock Control</button></a>
-        <a href="admin.php"><button class="redirectButton"  id="redirect">Admin</button></a>
-    </nav>
+    include("templates/sidebar.php") ?>
     <main>
         
         <div class="loginBox">

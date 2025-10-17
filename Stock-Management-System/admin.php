@@ -9,20 +9,12 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
+    
 
-    <?php $pageName = "Admin Page";
-    include("templates/header.php"); ?>
-    <nav><p>Navigation</p>
-        <?php
-        if (!isset($_SESSION['username'])) {
-            echo '<a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>';
-            echo '<a href="signUp.php"><button class="redirectButton"  id="redirect">Sign-Up</button></a>';
-        };
-        ?>
-        <a href="stockControl.php"><button class="redirectButton"  id="redirect">Stock Control</button></a>
-        <a href="index.php"><button class="redirectButton"  id="redirect">Home</button></a>
-    </nav>
+    <?php $pageName = "Home Page";
+    include("templates/header.php");
+    include("templates/sidebar.php") ?>
+    
     <main>
         <?php
             if (isset($_SESSION['username'])) {
