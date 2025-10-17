@@ -1,0 +1,75 @@
+:root{
+  --accent:#2a75bb;
+  --muted:#f4f6f8;
+  --card:#ffffff;
+  --gap:18px;
+  --radius:12px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--muted);color:#111}
+a{color:inherit;text-decoration:none}
+
+.site-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;background:var(--card);box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+.site-header h1{margin:0;font-size:20px}
+.site-header nav a{margin-left:12px;color:var(--accent)}
+
+main{padding:24px;min-height:calc(100vh - 120px)}
+
+
+.hero{max-width:900px;margin:20px auto;padding:28px;background:var(--card);border-radius:var(--radius);text-align:center}
+.btn{display:inline-block;padding:10px 16px;background:var(--accent);color:white;border-radius:8px}
+
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--gap);margin-top:16px}
+.viewBox{
+  display:flex;align-items:center;justify-content:center;
+  height:140px;background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.3));
+  border-radius:10px;box-shadow:0 6px 14px rgba(0,0,0,.06);text-transform:capitalize;
+  transition:transform .2s,filter .25s;
+}
+.viewBox:hover{transform:translateY(-6px);filter:brightness(.9)}
+.card-title{font-weight:700}
+
+
+.detail{max-width:720px;margin:20px auto}
+.detail-card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.06);text-align:center}
+.detail-card img{width:160px;height:160px;object-fit:contain}
+
+
+@media (max-width:600px){ .viewBox{height:120px} }
+
+
+
+
+.search-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: 16px;
+}
+.search-form input[type="search"] {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  min-width: 180px;
+}
+
+
+.card-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.card-sprite {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  flex: 0 0 72px;
+}
+
+.viewBox .card-title { font-weight:700; text-transform:capitalize; }
