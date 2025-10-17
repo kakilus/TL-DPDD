@@ -1,28 +1,29 @@
 .viewBox {
     display: grid;
     text-align: center;
-    width: 350px;
+    width: 300px;
     height: 400px;
     border-radius: 25px;
-    background-image: url("../images/clash-royale-emote.gif"); /* Correct path */
+    background-image: url("../images/clash-royale-emote.gif"); 
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     place-items: center;
-    transition: background-color 1s, opacity 0.5s; /* Add opacity transition */
+    transition: background-color 1s, filter 0.5s; 
     padding: 25px;
     font-size: 30px;
 }
 
 .viewBox:hover {
-    opacity: 0.3; /* Lower opacity on hover */
-    background-color: #111222; /* Dark background on hover */
+    filter: brightness(0.3); 
+
+    background-color: #020318; 
     font-size: 50px;
 }
 
 .viewBox:focus,
 .viewBox:active {
-    background-color: rgb(0, 0, 2);
+    background-color: rgb(0, 0, 0);
     transition: none;
-    opacity: 1; /* Restore opacity on focus/active */
+
 }

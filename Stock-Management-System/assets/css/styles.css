@@ -1,8 +1,13 @@
+html, body {
+    height: 100%;
+}
+
+
+
 body {
             display: grid;
-            grid-template-columns: 1fr 8fr;
-            grid-template-rows: 1fr 8fr;
-            overflow: hidden;
+            grid-template-columns: 1fr 9fr;
+            grid-template-rows: 1fr 9fr;
             margin: 0;
         }
 
@@ -13,13 +18,16 @@ body {
         }
 
         main {
-            grid-column: 2 / 3;
-            grid-row: 2 / 3;
-            min-height: 100vh;
+            grid-column: 2/3;
+            grid-row: 2/3;
+            min-height: 0;
             display: grid;
-            align-items: flex-start;
-            justify-content: flex-start;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            align-items: center;
+            justify-content: center;
             background-color: aliceblue;
+            overflow: auto;
+            
         }
 
         
