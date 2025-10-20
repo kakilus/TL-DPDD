@@ -14,16 +14,11 @@ session_start(); ?>
     <script src='assets/js/emailRegistered.js'></script>
 </head>
 <body>
-    <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
 
-    <?php $pageName = "Admin Page";
-    include("templates/header.php"); ?>
-    <nav><p>Navigation</p>
-        
-        <a href="stockControl.php"><button class="redirectButton"  id="redirect">Stock Control</button></a>
-        <a href="index.php"><button class="redirectButton"  id="redirect">Home</button></a>
-        <a href="admin.php"><button class="redirectButton"  id="redirect">Admin</button></a>
-    </nav>
+    <?php $pageName = "Home Page";
+    include("templates/header.php");
+    include("templates/sidebar.php") ?>
+    
     <main>
         <?php
             $dsn = "sqlite:my_database.db";

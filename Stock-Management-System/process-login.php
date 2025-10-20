@@ -13,15 +13,11 @@ session_start(); ?>
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <div class="logo"><img src="assets/images/clash-royale-emote.gif" alt="aaaaaa" class="img"></div>
+    
+    <?php $pageName = "Home Page";
+    include("templates/header.php");
+    include("templates/sidebar.php") ?>
 
-    <?php $pageName = "Admin Page";
-    include("templates/header.php"); ?>
-    <nav><p>Navigation</p>
-        <a href="stockControl.php"><button class="redirectButton"  id="redirect">Stock Control</button></a>
-        <a href="index.php"><button class="redirectButton"  id="redirect">Home</button></a>
-        <a href="admin.php"><button class="redirectButton"  id="redirect">Admin</button></a>
-    </nav>
     <main>
         <?php
             $dsn = "sqlite:my_database.db";
