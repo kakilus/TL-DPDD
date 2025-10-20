@@ -3,7 +3,7 @@
 function presentInfo(el) {
   if (!el) return;
   // Save original HTML if not already saved
-  if (!el.dataset.originalHtml) {
+  if (!el.infoText.originalHtml) {
     el.dataset.originalHtml = el.innerHTML;
   }
   // Replace with informational text
