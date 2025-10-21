@@ -45,7 +45,7 @@ for ($i = 0; $i < count($dates); $i++) {
     $code = $codes[$i];
     $icon = isset($weatherIcons[$code]) ? $weatherIcons[$code] : "clear.png";
     echo "<div class='forecast'>";
-    echo "<img src='../assets/images/{$icon}' alt='Weather icon'>";
+    echo "<img src='./assets/images/{$icon}' alt='Weather icon' class='weather-icon'>";
     echo "<p><strong>{$date}</strong></p>";
     echo "<p>Max: {$max}°C / Min: {$min}°C</p>";
     echo "</div>";

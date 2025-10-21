@@ -19,20 +19,25 @@ function restoreInfo(el) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const boxes = document.querySelectorAll('.viewBox');
 
-  boxes.forEach(function(box) {
-    box.addEventListener('mouseenter', function() {
-      console.log('mouseenter on', box);
-      presentInfo(box);
+  boxes.forEach(function (box) {
+    const titleEl = box.querySelector('.title');
+    if (!titleEl) return;
+
+    // Store original text once
+    if (!titleEl.hasAttribute('data-original-text')) {
+      titleEl.setAttribute('data-original-text', titleEl.textContent);
+    }
+
+    box.addEventListener('mouseenter', function () {
+      titleEl.textContent = 'Sample info text';
     });
 
-    box.addEventListener('mouseleave', function(event) {
-      // Check if the mouse has left the entire box
+    box.addEventListener('mouseleave', function (event) {
       if (!box.contains(event.relatedTarget)) {
-        console.log('mouseleave on', box);
-        restoreInfo(box);
+        titleEl.textContent = titleEl.getAttribute('data-original-text');
       }
     });
   });
