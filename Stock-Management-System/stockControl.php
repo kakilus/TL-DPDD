@@ -14,10 +14,12 @@
     include("templates/sidebar.php") ?>
     
     <main>
-        <?php
+        <?php 
             if (isset($_SESSION['username'])) {
                 echo "WELCOME BACK " . $_SESSION['username'];
             } ?>
+
+            <?php include("templates/forecast.php"); ?>
     </main>
 
 
