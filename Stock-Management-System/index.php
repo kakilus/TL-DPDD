@@ -25,7 +25,7 @@
         <?php
             
         include("templates/viewBox.php");
-        
+        // not sure if this will work with the images, apache bugging
         ?>
     </main>
 

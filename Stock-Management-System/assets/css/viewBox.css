@@ -1,5 +1,4 @@
 .viewBox {
-  /* common styles */
   position: relative;
   display: grid;
   text-align: center;
@@ -19,7 +18,7 @@
   margin: 10px;
 }
 
-/* different background images */
+
 .viewBox.img1 {
   background-image: url("../images/clear.gif");
 }
@@ -40,24 +39,24 @@
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0,0,0,0); /* no dark overlay initially */
+  background-color: rgba(0,0,0,0);
   transition: background-color 1s;
-  z-index: 1; /* sits above background but below text */
+  z-index: 1;
 }
 
 .viewBox:hover::before {
-  background-color: rgba(0,0,0,0.7); /* dark overlay on hover */
+  background-color: rgba(0,0,0,0.7);
 }
 
 .viewBox .text {
   position: relative;
-  z-index: 2; /* above the overlay so stays bright */
-  color: white; /* or whatever bright colour */
+  z-index: 2; 
+  color: white;
   font-size: 30px;
   transition: font-size 0.5s, color 0.5s;
 }
 
 .viewBox:hover .text {
-  font-size: 25px;
-  color: rgb(253, 253, 253); /* your hover text style */
+  font-size: 15px;
+  color: rgb(253, 253, 253);
 }
