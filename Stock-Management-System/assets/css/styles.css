@@ -26,8 +26,22 @@ body {
             align-items: center;
             background-color: aliceblue;
             overflow: auto;
+        }
+
+        .main2 {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            min-height: 0;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 7 equal columns filling full width */
+            align-items: center; /* vertically center content inside each box */
+            justify-items: center; /* horizontally center content inside each box */
+            background-color: aliceblue;
+            overflow: auto;
+            gap: 1rem; /* optional spacing between boxes */
             
         }
+
         .title {
             font-size: 30px;
             color: white;
@@ -103,13 +117,13 @@ body {
         }
 
         .forecast {
-            display: inline-block;
             text-align: center;
             margin: 10px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 10px;
             background-color: #f9f9f9;
+            transform: translate(200%, 0);
         }
 
         

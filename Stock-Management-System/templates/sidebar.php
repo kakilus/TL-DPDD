@@ -12,8 +12,8 @@
         if ($pageName != 'admin.php') {
             echo '<a href="admin.php"><button class="redirectButton"  id="redirect">Admin Page</button></a>';
         };
-        if ($pageName != 'stockControl.php') {
-            echo '<a href="stockControl.php"><button class="redirectButton"  id="redirect">Stock Control</button></a>';
+        if ($pageName != 'weatherForecast.php') {
+            echo '<a href="weatherForecast.php"><button class="redirectButton"  id="redirect">Weather Forecast</button></a>';
         };
         if ($pageName != 'index.php') {
             echo '<a href="index.php"><button class="redirectButton"  id="redirect">Home</button></a>';

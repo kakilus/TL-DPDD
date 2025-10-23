@@ -4,11 +4,11 @@ $pgName = basename($_SERVER['PHP_SELF']);
 if ($pgName == 'admin.php') {
     $name = 'Admin Page';
 };
-if ($pgName == 'stockControl.php') {
-    $name = 'Stock Control';
+if ($pgName == 'weatherForecast.php') {
+    $name = 'Weather Forecast Page';
 };
 if ($pgName == 'index.php') {
-    $name = 'Home';
+    $name = 'Home Page';
 };
 if ($pgName == 'prototype.php') {
     $name = 'Sign-In Page';
