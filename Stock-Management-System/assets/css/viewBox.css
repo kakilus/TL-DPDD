@@ -1,11 +1,11 @@
 .viewBox {
+  /* common styles */
   position: relative;
   display: grid;
   text-align: center;
   width: 300px;
   height: 400px;
   border-radius: 25px;
-  background-image: url("../images/monkey-jetpack.gif");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -16,7 +16,24 @@
   transition: background-color 1s;
   transform: translate(10%,0);
   overflow: hidden;
-  margin: 10px; /* Add margin to create space between viewBoxes */
+  margin: 10px;
+}
+
+/* different background images */
+.viewBox.img1 {
+  background-image: url("../images/clear.gif");
+}
+
+.viewBox.img2 {
+  background-image: url("../images/cloud.gif");
+}
+
+.viewBox.img3 {
+  background-image: url("../images/fog.gif");
+}
+
+.viewBox.img4 {
+  background-image: url("../images/rain.gif");
 }
 
 .viewBox::before {

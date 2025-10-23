@@ -18,8 +18,8 @@
             if (isset($_SESSION['username'])) {
                 echo "WELCOME BACK " . $_SESSION['username'];
             } ?>
-
             <?php include("templates/forecast.php"); ?>
+            
         </div>
 
 
