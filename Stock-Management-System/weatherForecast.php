@@ -20,7 +20,7 @@
             } ?>
             <?php include("templates/forecast.php"); ?>
             
-        </div>
+    </div>
 
 
 

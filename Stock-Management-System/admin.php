@@ -20,7 +20,7 @@
             if (isset($_SESSION['username'])) {
                 echo "WELCOME BACK " . $_SESSION['username'];
             } ?>
-            <img src="assets/images/monkey-jetpack.gif" class="img">
+            <p>work in progress</p>
     </main>
 
 
