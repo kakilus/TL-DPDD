@@ -16,6 +16,6 @@ if ($pgName == 'prototype.php') {
 if ($pgName == 'signUp.php') {
     $name = 'Sign-Up Page';
 };
-echo '<div class="logo"><img src="assets/images/logo.png" alt="aaaaaa" class="img"></div>';
+echo '<div class="logo"><img src="assets/images/logo.png" alt="Weather Logo" class="img"></div>';
 echo "<header>" . $name . "</header>";
 ?>

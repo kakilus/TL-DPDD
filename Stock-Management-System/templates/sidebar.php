@@ -5,21 +5,21 @@
     $pageName = basename($_SERVER['PHP_SELF']);
     if (!isset($_SESSION['username'])) {
         if ($pageName != 'prototype.php') {
-            echo '<a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>'; }
+            echo '<form action="prototype.php"><button class="redirectButton" id="redirect">Log-In</button></form>'; }
         if ($pageName != 'signUp.php') {
-        echo '<a href="signUp.php"><button class="redirectButton"  id="redirect">Sign-Up</button></a>'; }
+            echo '<form action="signUp.php"><button class="redirectButton" id="redirect">Sign-Up</button></form>'; }
     }?>
 
     <?php 
         
         if ($pageName != 'admin.php') {
-            echo '<a href="admin.php"><button class="redirectButton"  id="redirect">Admin Page</button></a>';
+            echo '<form action="admin.php"><button class="redirectButton" id="redirect">Admin Page</button></form>';
         };
         if ($pageName != 'weatherForecast.php') {
-            echo '<a href="weatherForecast.php"><button class="redirectButton"  id="redirect">Weather Forecast</button></a>';
+            echo '<form action="weatherForecast.php"><button class="redirectButton" id="redirect">Weather Forecast</button></form>';
         };
         if ($pageName != 'index.php') {
-            echo '<a href="index.php"><button class="redirectButton"  id="redirect">Home</button></a>';
+            echo '<form action="index.php"><button class="redirectButton" id="redirect">Home</button></form>';
         }
     
     ?>  
