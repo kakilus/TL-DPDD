@@ -2,13 +2,16 @@
 <nav>
 <p>Navigation</p>
     <?php
+    $pageName = basename($_SERVER['PHP_SELF']);
     if (!isset($_SESSION['username'])) {
-        echo '<a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>';
-        echo '<a href="signUp.php"><button class="redirectButton"  id="redirect">Sign-Up</button></a>';
+        if ($pageName != 'prototype.php') {
+            echo '<a href="prototype.php"><button class="redirectButton"  id="redirect">Log-In</button></a>'; }
+        if ($pageName != 'signUp.php') {
+        echo '<a href="signUp.php"><button class="redirectButton"  id="redirect">Sign-Up</button></a>'; }
     }?>
 
     <?php 
-        $pageName = basename($_SERVER['PHP_SELF']);
+        
         if ($pageName != 'admin.php') {
             echo '<a href="admin.php"><button class="redirectButton"  id="redirect">Admin Page</button></a>';
         };
