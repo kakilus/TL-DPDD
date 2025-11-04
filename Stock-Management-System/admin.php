@@ -18,7 +18,7 @@
     <main>
         <?php
             if (isset($_SESSION['username'])) {
-                echo "WELCOME BACK " . $_SESSION['username'];
+                console.log("logged in");
             } ?>
             <p>work in progress</p>
     </main>

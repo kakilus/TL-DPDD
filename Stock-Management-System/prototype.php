@@ -21,7 +21,7 @@
             </p><br>
             <?php
             if (isset($_SESSION['username'])) {
-                echo "WELCOME BACK " . $_SESSION['username'];
+                console.log("logged in");
             } else {
                 echo "Welcome new user.<br>";
                 echo "<p>Log-In</p>
