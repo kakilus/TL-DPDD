@@ -30,6 +30,7 @@ session_start(); ?>
             if (isset($_POST['user'], $_POST['password'], $_POST['email'])) {
                 $name = $_POST['user'];
                 $email = $_POST['email'];
+                $isAdmin = 0;
                 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $alreadyExists = false;
 
@@ -47,10 +48,12 @@ session_start(); ?>
                     echo "<script>emailAlert();</script>";
                     //exit; // Stop further execution
                 } else {
-                    $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
+                    $stmt = $pdo->prepare("INSERT INTO users (name, email, password, isAdmin) VALUES (?, ?, ?, ?)");
                 
-                    $stmt->execute([$name, $email, $password]);
+                    $stmt->execute([$name, $email, $password, $isAdmin]);
                     $_SESSION['username'] = $name;
+                    $_SESSION['isAdmin'] = $isAdmin;
+                    $_SESSION['email'] = $email;
                     echo "User " . htmlspecialchars($name) . " registered successfully.";
                 }
                 

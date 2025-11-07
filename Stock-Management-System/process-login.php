@@ -23,7 +23,7 @@ session_start(); ?>
         <?php
             $dsn = "sqlite:my_database.db";
             $pdo = new PDO($dsn);
-            $stmt = $pdo->query("SELECT name, password, email FROM users");
+            $stmt = $pdo->query("SELECT name, password, email, isAdmin FROM users");
             $names = $stmt->fetchAll(PDO::FETCH_ASSOC); // Get all rows as an associative array
 
             $loginSuccess = false;
@@ -35,11 +35,13 @@ session_start(); ?>
                         $_POST['user'] === $name['name'] &&
                         password_verify($_POST['password'], $name['password'])
                     ) {
+                        $isAdmin = $name['isAdmin'];
                         $user = htmlspecialchars($_POST['user']);
                         echo "hello " . $user;
                         $email = $name['email'];
                         $_SESSION['username'] = $user;
                         $_SESSION['email'] = $email;
+                        $_SESSION['isAdmin'] = $isAdmin;
                         $loginSuccess = true;
                         break;
                     }

@@ -19,13 +19,14 @@
     <main>
         <?php
             if (isset($_SESSION['username'])) {
-                console.log("logged in" + $_SESSION['username']);
+                $isAdmin = $_SESSION['isAdmin'];
+                if ($isAdmin == 1) {
+                    echo "<p>Welcome, Admin!</p>";
+                } else {
+                    echo "<p>Admin access denied</p>";
+                }
             }
-            if ($_SESSION['username'] == "john_pork") {
-                echo "<p>Welcome, Admin!</p>";
-            } else {
-                echo "<p>Admin access denied</p>";
-            }
+            
             ?>
             
     </main>

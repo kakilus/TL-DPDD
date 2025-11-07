@@ -29,7 +29,7 @@
     <?php if (isset($_SESSION['username'])) {
         echo "<p class='welcome'>WELCOME BACK " . $_SESSION['username'] . "</p>";
         echo "<br><p class = 'welcome'>Your email is " . $_SESSION['email'] . "</p>";
-        
+        echo "<br><p class = 'welcome'>Admin status: " . $_SESSION['isAdmin'] . "</p>";
     };
     ?>
     
