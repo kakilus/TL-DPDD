@@ -58,5 +58,4 @@ session_start(); ?>
 
 
 </body>
-</html> 
-<button ><a href="prototype.php">try again?</a></button>
+</html>
