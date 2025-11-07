@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
 </head>
 <body>
     
@@ -18,9 +19,15 @@
     <main>
         <?php
             if (isset($_SESSION['username'])) {
-                console.log("logged in");
-            } ?>
-            <p>work in progress</p>
+                console.log("logged in" + $_SESSION['username']);
+            }
+            if ($_SESSION['username'] == "john_pork") {
+                echo "<p>Welcome, Admin!</p>";
+            } else {
+                echo "<p>Admin access denied</p>";
+            }
+            ?>
+            
     </main>
 
 

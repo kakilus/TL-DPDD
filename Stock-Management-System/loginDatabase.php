@@ -18,7 +18,8 @@ $pdo->exec("
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        isAdmin BOOLEAN DEFAULT 0
     )
 ");
 
@@ -26,15 +27,16 @@ $pdo->exec("
 $name = 'john_pork'; // The user's name
 $email = 'john@pork.com'; // The user's email address
 $password = password_hash('password', PASSWORD_DEFAULT); 
+$isAdmin = 1;
 // Hash the user's password securely using the recommended algorithm (currently bcrypt)
 
 // 5. Prepare an SQL statement to insert the new user into the 'users' table
 // Using prepare() with placeholders prevents SQL injection attacks
-$stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
+$stmt = $pdo->prepare("INSERT INTO users (name, email, password, isAdmin) VALUES (?, ?, ?, ?)");
 
 // 6. Execute the prepared statement with the actual values
 // This inserts the user into the table
-$stmt->execute([$name, $email, $password]);
+$stmt->execute([$name, $email, $password, $isAdmin]);
 
 // 7. Print a success message so we know the script ran correctly
 echo "Database and starting user table created successfully.\n";

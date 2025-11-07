@@ -10,7 +10,7 @@
     <script src="assets/js/redirect.js"></script>
     <script src="assets/js/presentInfo.js"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
-
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
 </head>
 <body>
 
