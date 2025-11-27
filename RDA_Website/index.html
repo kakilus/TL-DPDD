@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Haven Zoo</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="container header-inner">
+        <div class="logo">ZOO</div>
+        <nav class="desktop-nav">
+            <a href="#home">Home</a>
+            <a href="#animals">Animals</a>
+            <a href="#visit">Visit</a>
+            <a href="#conservation">Conservation</a>
+            <a href="#about">About</a>
+        </nav>
+        <button class="login-btn" data-modal-target="#loginModal">Login</button>
+        <button class="hamburger" aria-label="Open mobile menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#home">Home</a>
+        <a href="#animals">Animals</a>
+        <a href="#visit">Visit</a>
+        <a href="#conservation">Conservation</a>
+        <a href="#about">About</a>
+        <a href="#" data-modal-target="#loginModal">Login</a>
+    </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
+    <img src="assets/img/hero-zoo-animals.jpg" alt="Zoo animals hero" class="hero-bg">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Welcome to Wildlife Haven Zoo</h1>
+        <p>Experience nature, meet amazing animals, and make memories!</p>
+        <div class="hero-buttons">
+            <button class="btn primary" data-modal-target="#bookingModal">Plan Your Visit</button>
+            <button class="btn secondary" data-modal-target="#animalsSection">Meet Our Animals</button>
+        </div>
+    </div>
+</section>
+
+<!-- ================= ANIMALS ================= -->
+<section id="animals" class="animals-section">
+    <div class="container">
+        <h2>Meet Our Animals</h2>
+        <p class="section-subtitle">Explore the incredible wildlife we care for and protect.</p>
+        <div class="animal-grid">
+            <div class="animal-card">
+                <img src="assets/img/animal-lion.jpg" alt="African Lion">
+                <div class="card-body">
+                    <h3>African Lion</h3>
+                    <p>The king of the savanna, majestic and powerful.</p>
+                    <a href="#" class="learn-link">Learn More →</a>
+                </div>
+            </div>
+            <div class="animal-card">
+                <img src="assets/img/animal-elephant.jpg" alt="Asian Elephant">
+                <div class="card-body">
+                    <h3>Asian Elephant</h3>
+                    <p>Gentle giants with incredible memory and social bonds.</p>
+                    <a href="#" class="learn-link">Learn More →</a>
+                </div>
+            </div>
+            <div class="animal-card">
+                <img src="assets/img/animal-tiger.jpg" alt="Bengal Tiger">
+                <div class="card-body">
+                    <h3>Bengal Tiger</h3>
+                    <p>Stealthy and powerful, a symbol of strength.</p>
+                    <a href="#" class="learn-link">Learn More →</a>
+                </div>
+            </div>
+            <div class="animal-card">
+                <img src="assets/img/animal-panda.jpg" alt="Giant Panda">
+                <div class="card-body">
+                    <h3>Giant Panda</h3>
+                    <p>Icon of conservation, adorable and unique.</p>
+                    <a href="#" class="learn-link">Learn More →</a>
+                </div>
+            </div>
+            <div class="animal-card">
+                <img src="assets/img/animal-gorilla.jpg" alt="Mountain Gorilla">
+                <div class="card-body">
+                    <h3>Mountain Gorilla</h3>
+                    <p>Intelligent and social primates living in lush habitats.</p>
+                    <a href="#" class="learn-link">Learn More →</a>
+                </div>
+            </div>
+            <div class="animal-card">
+                <img src="assets/img/animal-red-panda.jpg" alt="Red Panda">
+                <div class="card-body">
+                    <h3>Red Panda</h3>
+                    <p>Small, agile, and adorable forest-dwelling mammals.</p>
+                    <a href="#" class="learn-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= PLAN YOUR VISIT ================= -->
+<section id="visit" class="visit-section">
+    <div class="container">
+        <h2>Plan Your Visit</h2>
+        <div class="visit-grid">
+            <div class="visit-card">
+                <div class="icon-circle">🕒</div>
+                <h3>Hours</h3>
+                <p>Mon-Fri: 9am - 6pm</p>
+                <p>Sat-Sun: 8am - 7pm</p>
+                <p>Last entry 1 hour before closing</p>
+            </div>
+            <div class="visit-card">
+                <div class="icon-circle">🎟️</div>
+                <h3>Admission</h3>
+                <p>Adults: $29.99</p>
+                <p>Children (3-12): $19.99</p>
+                <p>Seniors (65+): $24.99</p>
+            </div>
+            <div class="visit-card">
+                <div class="icon-circle">📍</div>
+                <h3>Location</h3>
+                <p>123 Wildlife Drive</p>
+                <p>Nature City, NC 12345</p>
+                <p>Free parking available</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= HOTEL SECTION ================= -->
+<section class="hotel-section">
+    <div class="container">
+        <h2>Stay Close to the Action</h2>
+        <div class="hotel-grid">
+            <div class="hotel-card">
+                <img src="assets/img/hotel-safari-lodge.jpg" alt="Safari Lodge">
+                <h3>Safari Lodge</h3>
+                <p>Luxury accommodations with views of the African savanna exhibits.</p>
+                <p class="amenities">Pool, Restaurant, Spa</p>
+                <button class="btn primary" data-modal-target="#bookingModal">Book Now</button>
+            </div>
+            <div class="hotel-card">
+                <img src="assets/img/hotel-rainforest-retreat.jpg" alt="Rainforest Retreat">
+                <h3>Rainforest Retreat</h3>
+                <p>Immersive experience surrounded by tropical gardens and exotic birds.</p>
+                <p class="amenities">Breakfast Included, Gym</p>
+                <button class="btn primary" data-modal-target="#bookingModal">Book Now</button>
+            </div>
+            <div class="hotel-card">
+                <img src="assets/img/hotel-wildlife-inn.jpg" alt="Wildlife Inn">
+                <h3>Wildlife Inn</h3>
+                <p>Family-friendly hotel just steps from the main zoo entrance.</p>
+                <p class="amenities">Free Parking, Kids Activities</p>
+                <button class="btn primary" data-modal-target="#bookingModal">Book Now</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= LOYALTY PROGRAM ================= -->
+<section class="loyalty-section">
+    <div class="container">
+        <h2>Join Our Loyalty Program</h2>
+        <div class="loyalty-grid">
+            <div class="loyalty-card bronze">
+                <div class="tier-header bronze">
+                    <h3>Bronze</h3>
+                    <p class="price">Free</p>
+                </div>
+                <ul>
+                    <li>Monthly newsletter</li>
+                    <li>Birthday discount</li>
+                    <li>Event notifications</li>
+                    <li>Member-only hours</li>
+                </ul>
+                <button class="btn primary">Join Bronze</button>
+            </div>
+            <div class="loyalty-card silver featured">
+                <div class="tier-header silver">
+                    <h3>Silver</h3>
+                    <p class="price">$49/year</p>
+                </div>
+                <ul>
+                    <li>All Bronze benefits</li>
+                    <li>10% gift shop discount</li>
+                    <li>Free parking</li>
+                    <li>Priority event registration</li>
+                    <li>Quarterly behind-scenes tours</li>
+                </ul>
+                <button class="btn primary">Join Silver</button>
+            </div>
+            <div class="loyalty-card gold">
+                <div class="tier-header gold">
+                    <h3>Gold</h3>
+                    <p class="price">$99/year</p>
+                </div>
+                <ul>
+                    <li>All Silver benefits</li>
+                    <li>Unlimited free admission</li>
+                    <li>20% gift shop discount</li>
+                    <li>Exclusive member events</li>
+                    <li>Guest passes (4 per year)</li>
+                    <li>VIP animal encounters</li>
+                </ul>
+                <button class="btn primary">Join Gold</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <div class="logo">ZOO</div>
+                <p>Wildlife Haven Zoo - Connecting people with nature since 1985</p>
+                <p>📞 (555) 123-4567</p>
+                <p>✉️ info@wildlifehavenzoo.com</p>
+                <p>🏠 123 Wildlife Drive, Nature City</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Animals</h4>
+                <a href="#">Mammals</a>
+                <a href="#">Birds</a>
+                <a href="#">Reptiles</a>
+                <a href="#">Aquatic Life</a>
+            </div>
+            <div class="footer-col">
+                <h4>Visit Info</h4>
+                <a href="#">Hours & Admission</a>
+                <a href="#">Map</a>
+                <a href="#">Directions</a>
+                <a href="#">Group Visits</a>
+            </div>
+            <div class="footer-col">
+                <h4>Conservation</h4>
+                <a href="#">Our Mission</a>
+                <a href="#">Research</a>
+                <a href="#">Partner Programs</a>
+                <a href="#">Donate</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Wildlife Haven Zoo. All rights reserved.</p>
+            <div class="socials">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ================= MODALS ================= -->
+
+<!-- Login Modal -->
+<div class="modal" id="loginModal" aria-hidden="true">
+    <div class="modal-content">
+        <span class="close" data-close>&times;</span>
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" required>
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required>
+            <button type="submit" class="btn primary">Login</button>
+        </form>
+        <p>Don't have an account? <a href="#" data-switch="#signupModal">Sign Up</a></p>
+    </div>
+</div>
+
+<!-- Signup Modal -->
+<div class="modal" id="signupModal" aria-hidden="true">
+    <div class="modal-content">
+        <span class="close" data-close>&times;</span>
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <label for="signupName">Full Name</label>
+            <input type="text" id="signupName" required>
+            <label for="signupEmail">Email</label>
+            <input type="email" id="signupEmail" required>
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" required>
+            <button type="submit" class="btn primary">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="#" data-switch="#loginModal">Login</a></p>
+    </div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal" id="bookingModal" aria-hidden="true">
+    <div class="modal-content">
+        <span class="close" data-close>&times;</span>
+        <h2>Plan Your Visit</h2>
+        <form id="bookingStartForm">
+            <label for="numAdults">Adults</label>
+            <input type="number" id="numAdults" value="1" min="1">
+            <label for="numChildren">Children</label>
+            <input type="number" id="numChildren" value="0" min="0">
+            <label for="hotelSelect">Hotel (optional)</label>
+            <select id="hotelSelect">
+                <option value="">No Hotel</option>
+                <option value="Safari Lodge">Safari Lodge</option>
+                <option value="Rainforest Retreat">Rainforest Retreat</option>
+                <option value="Wildlife Inn">Wildlife Inn</option>
+            </select>
+            <button type="button" class="btn primary" data-modal-target="#calendarModal">Choose Dates</button>
+        </form>
+    </div>
+</div>
+
+<!-- Calendar Modal -->
+<div class="modal" id="calendarModal" aria-hidden="true">
+    <div class="modal-content">
+        <span class="close" data-close>&times;</span>
+        <h2>Select Your Stay</h2>
+        <div class="calendar-container" id="calendarContainer">
+            <!-- Calendar will be rendered here by JS -->
+        </div>
+        <button type="button" class="btn primary" id="calendarNextBtn">Continue to Visitor Info</button>
+    </div>
+</div>
+
+<!-- Visitor Info Modal -->
+<div class="modal" id="visitorModal" aria-hidden="true">
+    <div class="modal-content">
+        <span class="close" data-close>&times;</span>
+        <h2>Visitor Information</h2>
+        <form id="visitorForm">
+            <label for="visitorName">Full Name</label>
+            <input type="text" id="visitorName" required>
+            <label for="visitorEmail">Email</label>
+            <input type="email" id="visitorEmail" required>
+            <label for="visitorPhone">Phone</label>
+            <input type="tel" id="visitorPhone" required>
+            <label for="visitorNotes">Notes (optional)</label>
+            <textarea id="visitorNotes"></textarea>
+            <button type="button" class="btn primary" id="visitorNextBtn">Proceed to Payment</button>
+        </form>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal" id="paymentModal" aria-hidden="true">
+    <div class="modal-content">
+        <span class="close" data-close>&times;</span>
+        <h2>Payment</h2>
+        <form id="paymentForm">
+            <label for="cardName">Name on Card</label>
+            <input type="text" id="cardName" required>
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" maxlength="16" required>
+            <label for="cardExpiry">Expiry Date</label>
+            <input type="text" id="cardExpiry" placeholder="MM/YY" required>
+            <label for="cardCVC">CVC</label>
+            <input type="text" id="cardCVC" maxlength="3" required>
+            <button type="button" class="btn primary" id="payBtn">Pay Now</button>
+        </form>
+    </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="modal" id="confirmationModal" aria-hidden="true">
+    <div class="modal-content">
+        <span class="close" data-close>&times;</span>
+        <h2>Booking Confirmed!</h2>
+        <div id="confirmationDetails">
+            <!-- JS will populate -->
+        </div>
+        <button class="btn primary" data-close>Done</button>
+    </div>
+</div>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>
