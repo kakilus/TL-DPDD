@@ -428,7 +428,7 @@ h2 {
 
 .loyalty-card li {
     margin: 8px 0;
-    color: var(--gray-600);
+    color: var(--gray-50);
     list-style: "✔️ ";
 }
 
