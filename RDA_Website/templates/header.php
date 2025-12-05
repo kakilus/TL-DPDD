@@ -12,6 +12,10 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php if (isset($_SESSION['username'])): ?>
             <!-- Show YOUR BOOKINGS button when logged in -->
             <button class="login-btn" data-modal-target="#bookingsModal">Your Bookings</button>
+            <!-- Show ADMIN PANEL button for root@gmail.com -->
+            <?php if ($_SESSION['username'] === 'root@gmail.com'): ?>
+                <button class="login-btn" style="background:var(--amber-600);" data-modal-target="#adminModal">Admin Panel</button>
+            <?php endif; ?>
         <?php endif; ?>
 
         <nav class="desktop-nav">

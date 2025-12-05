@@ -51,11 +51,20 @@
             </div>
 
             <div class="animal-card">
-                <img src="assets/img/goofy.gif" alt="Red Panda">
+                <img src="assets/img/animal-red-panda.jpg" alt="Red Panda">
                 <div class="card-body">
                     <h3>Red Panda</h3>
                     <p>Small, agile, and adorable forest-dwelling mammals.</p>
                     <p class="learn-link"><strong>Feeding Time:</strong> 4:00 PM</p>
+                </div>
+            </div>
+
+            <div class="animal-card">
+                <img src="assets/img/animal-chill-monkey.gif" alt="chill asf monkey">
+                <div class="card-body">
+                    <h3>chill monky</h3>
+                    <p>very chill very dangerous monky.</p>
+                    <p class="learn-link"><strong>Feeding Time:</strong> 5:00 PM</p>
                 </div>
             </div>
 
@@ -68,14 +77,14 @@
                 </div>
             </div>
 
-            <div class="animal-card">
+            <!--<div class="animal-card">
                 <img src="assets/img/chud-chudjak.gif" alt="chud">
                 <div class="card-body">
                     <h3>chud</h3>
                     <p>THE WEST HAS FALLEN 😢😢</p>
                     <p class="learn-link"><strong>Feeding Time:</strong> 5:00 PM (he demands it)</p>
                 </div>
-            </div>
+            </div>-->
 
         </div>
     </div>

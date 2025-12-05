@@ -24,7 +24,7 @@
 
             <div class="footer-col">
                 <h4>Animals</h4>
-                <a href="#" class="footer-link">Discover Species</a>
+                <a href="#" class="footer-link" data-modal-target="#discoverSpeciesModal">Discover Species</a>
                 <a href="#" class="footer-link">Conservation Efforts</a>
                 <a href="#" class="footer-link">Feeding Schedules</a>
             </div>

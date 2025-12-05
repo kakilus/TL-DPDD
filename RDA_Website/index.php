@@ -11,7 +11,7 @@ try {
 }
 
 /* =======================
-   FETCH USER BOOKINGS (must be before any HTML output)
+   FETCH USER BOOKINGS 
 ======================== */
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['fetch_bookings'])) {
     header('Content-Type: application/json');
@@ -76,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signupEmail'])) {
     $name = trim($_POST['signupName'] ?? '');
     $email = trim($_POST['signupEmail']);
     $password = $_POST['signupPassword'] ?? '';
+    $phone = trim($_POST['signupPhone'] ?? '');
 
     // basic validations: password length and email contains @ and .
     if (strlen($password) < 8) {
@@ -99,10 +100,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signupEmail'])) {
         exit;
     }
 
+    // validate phone (digits only, reasonable length)
+    $phoneDigits = preg_replace('/\D+/', '', $phone);
+    if (strlen($phoneDigits) < 7 || strlen($phoneDigits) > 15) {
+        $_SESSION['auth_error'] = 'Please enter a valid phone number (7 to 15 digits).';
+        header('Location: index.php');
+        exit;
+    }
+
     // insert user
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $ins = $db->prepare('INSERT INTO users (name, email, password_hash, phone) VALUES (?, ?, ?, ?)');
-    $ins->execute([$name, $email, $hash, '']);
+    $ins->execute([$name, $email, $hash, $phone]);
 
     $_SESSION['username'] = $email;
     $_SESSION['user_id'] = $db->lastInsertId();
@@ -273,14 +282,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['store_loyalty_members
     }
 
     try {
-        // Deactivate any existing membership (for upgrades)
+        // Deactivate any existing membership to be able to upgrade/downgrade
         $updateStmt = $db->prepare('UPDATE loyalty_memberships SET active = 0 WHERE user_id = ? AND active = 1');
         $updateStmt->execute([$user_id]);
 
         $start_date = date('Y-m-d');
         $expires_date = null;
         
-        // Set expiry dates based on tier (1 year from start)
+        // Set expiry dates
         if ($tier !== 'Bronze') {
             $expires_date = date('Y-m-d', strtotime('+1 year'));
         }
@@ -301,6 +310,126 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['store_loyalty_members
     exit;
 }
 
+/* =======================
+   ADMIN: CHECK IF USER IS ADMIN
+======================== */
+function isAdmin() {
+    return isset($_SESSION['username']) && $_SESSION['username'] === 'root@gmail.com';
+}
+
+/* =======================
+   ADMIN: FETCH ALL BOOKINGS
+======================== */
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['admin_fetch_bookings'])) {
+    header('Content-Type: application/json');
+    
+    if (!isAdmin()) {
+        echo json_encode(['success' => false, 'error' => 'Unauthorized']);
+        exit;
+    }
+
+    try {
+        // Fetch all hotel bookings with user info
+        $hotelStmt = $db->prepare('SELECT h.*, u.email, u.name FROM hotel_bookings h JOIN users u ON h.user_id = u.id ORDER BY h.created_at DESC');
+        $hotelStmt->execute();
+        $hotels = $hotelStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Fetch all visit bookings with user info
+        $visitStmt = $db->prepare('SELECT v.*, u.email, u.name FROM visit_bookings v JOIN users u ON v.user_id = u.id ORDER BY v.created_at DESC');
+        $visitStmt->execute();
+        $visits = $visitStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode(['success' => true, 'hotels' => $hotels, 'visits' => $visits]);
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'error' => 'Database error']);
+    }
+    exit;
+}
+
+/* =======================
+   ADMIN: FETCH VOLUME & REVENUE DATA
+======================== */
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['admin_fetch_stats'])) {
+    header('Content-Type: application/json');
+    
+    if (!isAdmin()) {
+        echo json_encode(['success' => false, 'error' => 'Unauthorized']);
+        exit;
+    }
+
+    try {
+        $currentMonth = date('Y-m');
+        
+        // Volume: count bookings per day this month
+        $volumeStmt = $db->prepare('
+            SELECT DATE(created_at) as day, COUNT(*) as count
+            FROM (
+                SELECT created_at FROM hotel_bookings WHERE strftime("%Y-%m", created_at) = ?
+                UNION ALL
+                SELECT created_at FROM visit_bookings WHERE strftime("%Y-%m", created_at) = ?
+            )
+            GROUP BY day
+            ORDER BY day
+        ');
+        $volumeStmt->execute([$currentMonth, $currentMonth]);
+        $volumeData = $volumeStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Revenue: sum totals per day this month
+        $revenueStmt = $db->prepare('
+            SELECT DATE(created_at) as day, SUM(total_price) as revenue
+            FROM (
+                SELECT created_at, total_price FROM hotel_bookings WHERE strftime("%Y-%m", created_at) = ?
+                UNION ALL
+                SELECT created_at, total_price FROM visit_bookings WHERE strftime("%Y-%m", created_at) = ?
+            )
+            GROUP BY day
+            ORDER BY day
+        ');
+        $revenueStmt->execute([$currentMonth, $currentMonth]);
+        $revenueData = $revenueStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode(['success' => true, 'volume' => $volumeData, 'revenue' => $revenueData]);
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'error' => 'Database error']);
+    }
+    exit;
+}
+
+/* =======================
+   ADMIN: DELETE BOOKING
+======================== */
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_delete_booking'])) {
+    header('Content-Type: application/json');
+    
+    if (!isAdmin()) {
+        echo json_encode(['success' => false, 'error' => 'Unauthorized']);
+        exit;
+    }
+
+    $bookingType = trim($_POST['type'] ?? '');
+    $bookingId = intval($_POST['id'] ?? 0);
+
+    if ($bookingType === 'hotel') {
+        try {
+            $stmt = $db->prepare('DELETE FROM hotel_bookings WHERE id = ?');
+            $stmt->execute([$bookingId]);
+            echo json_encode(['success' => true, 'message' => 'Hotel booking deleted']);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'error' => 'Database error']);
+        }
+    } elseif ($bookingType === 'visit') {
+        try {
+            $stmt = $db->prepare('DELETE FROM visit_bookings WHERE id = ?');
+            $stmt->execute([$bookingId]);
+            echo json_encode(['success' => true, 'message' => 'Visit booking deleted']);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'error' => 'Database error']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'error' => 'Invalid booking type']);
+    }
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -309,8 +438,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['store_loyalty_members
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riget Zoo Adventures</title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <!-- PayPal SDK (sandbox client-id 'sb' for testing) -->
+    <!-- PayPal SDK API -->
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=GBP"></script>
+    <!-- Chart.js for admin graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script>
         const isLoggedIn = <?php echo isset($_SESSION['username']) ? 'true' : 'false'; ?>;
     </script>

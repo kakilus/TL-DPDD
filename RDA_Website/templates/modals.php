@@ -45,6 +45,9 @@
             <label for="signupEmail">Email</label>
             <input type="email" id="signupEmail" name="signupEmail" required>
 
+            <label for="signupPhone">Phone</label>
+            <input type="tel" id="signupPhone" name="signupPhone" required placeholder="e.g. +441234567890" maxlength="20">
+
             <label for="signupPassword">Password</label>
             <input type="password" id="signupPassword" name="signupPassword" required>
 
@@ -266,6 +269,17 @@
 </div>
 
 
+<!-- Discover Species Modal -->
+<div id="discoverSpeciesModal" class="modal">
+    <div class="modal-content" style="max-width:600px;">
+        <span class="close" data-close>&times;</span>
+        <h2>Discover Species</h2>
+        <div style="display:flex;justify-content:center;padding:20px 0;">
+            <iframe width="110" height="200" src="https://www.myinstants.com/instant/pluh-38652/embed/" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+</div>
+
 <!-- Footer WIP Modal -->
 <div id="footerWipModal" class="modal">
     <div class="modal-content">
@@ -312,5 +326,87 @@
             <button id="acceptNecessaryBtn" class="btn secondary">Accept Necessary</button>
             <button id="acceptAllCookiesBtn" class="btn primary">Accept All</button>
         </div>
+    </div>
+</div>
+
+<!-- Accessibility Toggle Button (sticky at bottom) -->
+<button id="accessibilityToggleBtn" class="accessibility-toggle" aria-label="Accessibility options" aria-expanded="false" title="Accessibility settings">
+    ♿
+</button>
+
+<!-- Accessibility Panel -->
+<div id="accessibilityPanel" class="accessibility-panel" aria-hidden="true">
+    <div class="accessibility-panel-content">
+        <h3 style="margin-top:0;">Accessibility Options</h3>
+        
+        <div class="accessibility-option">
+            <label for="highContrastToggle">
+                <input type="checkbox" id="highContrastToggle"> High Contrast Mode
+            </label>
+        </div>
+
+        <div class="accessibility-option">
+            <label for="largerTextToggle">
+                <input type="checkbox" id="largerTextToggle"> Larger Text
+            </label>
+        </div>
+
+        <div class="accessibility-option">
+            <label for="dyslexiaFontToggle">
+                <input type="checkbox" id="dyslexiaFontToggle"> Dyslexia-Friendly Font
+            </label>
+        </div>
+
+        <div class="accessibility-option">
+            <label for="reducedMotionToggle">
+                <input type="checkbox" id="reducedMotionToggle"> Reduce Motion
+            </label>
+        </div>
+
+        <div class="accessibility-option">
+            <label for="focusIndicatorToggle">
+                <input type="checkbox" id="focusIndicatorToggle"> Enhanced Focus Indicators
+            </label>
+        </div>
+
+        <button id="resetAccessibilityBtn" class="btn secondary" style="width:100%;margin-top:12px;">Reset to Default</button>
+    </div>
+</div>
+
+<!-- Admin Panel Modal -->
+<div id="adminModal" class="modal" aria-hidden="true">
+    <div class="modal-content" style="max-width:900px;max-height:85vh;overflow:auto;">
+        <span class="close" data-close>&times;</span>
+        <h2>Admin Panel</h2>
+
+        <!-- Stats Summary -->
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px;">
+            <div style="background:#f0f0f0;padding:12px;border-radius:6px;text-align:center;">
+                <p style="margin:0;color:#666;">Total Bookings</p>
+                <p id="adminTotalBookings" style="margin:0;font-size:1.8rem;font-weight:bold;color:var(--green-600);">0</p>
+            </div>
+            <div style="background:#f0f0f0;padding:12px;border-radius:6px;text-align:center;">
+                <p style="margin:0;color:#666;">Month Revenue</p>
+                <p id="adminTotalRevenue" style="margin:0;font-size:1.8rem;font-weight:bold;color:var(--green-600);">£0.00</p>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px;">
+            <div style="background:#fff;border:1px solid #ddd;border-radius:6px;padding:12px;">
+                <canvas id="adminVolumeChart"></canvas>
+            </div>
+            <div style="background:#fff;border:1px solid #ddd;border-radius:6px;padding:12px;">
+                <canvas id="adminRevenueChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Bookings Table -->
+        <h3>All Bookings</h3>
+        <div id="adminBookingsContainer" style="max-height:400px;overflow-y:auto;border:1px solid #ddd;border-radius:6px;">
+            <p style="text-align:center;color:#666;padding:20px;">Loading bookings...</p>
+        </div>
+
+        <button id="adminRefreshBtn" class="btn primary" style="margin-top:16px;width:100%;">Refresh Data</button>
     </div>
 </div>

@@ -16,6 +16,140 @@ document.addEventListener('click', (e) => {
 });
 
 /* ============================================================
+   ACCESSIBILITY PANEL & FEATURES
+============================================================ */
+function loadAccessibilitySettings() {
+    try {
+        const settings = JSON.parse(localStorage.getItem('accessibility_settings')) || {};
+        
+        // Apply each setting if it was enabled
+        if (settings.highContrast) {
+            document.body.classList.add('accessibility-high-contrast');
+            document.getElementById('highContrastToggle').checked = true;
+        }
+        if (settings.largerText) {
+            document.body.classList.add('accessibility-larger-text');
+            document.getElementById('largerTextToggle').checked = true;
+        }
+        if (settings.dyslexiaFont) {
+            document.body.classList.add('accessibility-dyslexia-font');
+            document.getElementById('dyslexiaFontToggle').checked = true;
+        }
+        if (settings.reducedMotion) {
+            document.body.classList.add('accessibility-reduce-motion');
+            document.getElementById('reducedMotionToggle').checked = true;
+        }
+        if (settings.focusIndicators) {
+            document.body.classList.add('accessibility-focus-indicators');
+            document.getElementById('focusIndicatorToggle').checked = true;
+        }
+    } catch (e) {
+        console.error('Error loading accessibility settings:', e);
+    }
+}
+
+function saveAccessibilitySettings() {
+    try {
+        const settings = {
+            highContrast: document.getElementById('highContrastToggle').checked,
+            largerText: document.getElementById('largerTextToggle').checked,
+            dyslexiaFont: document.getElementById('dyslexiaFontToggle').checked,
+            reducedMotion: document.getElementById('reducedMotionToggle').checked,
+            focusIndicators: document.getElementById('focusIndicatorToggle').checked
+        };
+        localStorage.setItem('accessibility_settings', JSON.stringify(settings));
+    } catch (e) {
+        console.error('Error saving accessibility settings:', e);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('accessibilityToggleBtn');
+    const panel = document.getElementById('accessibilityPanel');
+    const resetBtn = document.getElementById('resetAccessibilityBtn');
+
+    // Load saved settings on page load
+    loadAccessibilitySettings();
+
+    // Toggle panel visibility
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            const isHidden = panel.getAttribute('aria-hidden') === 'true';
+            panel.setAttribute('aria-hidden', !isHidden ? 'true' : 'false');
+            toggleBtn.setAttribute('aria-expanded', isHidden);
+        });
+    }
+
+    // Wire all checkboxes to toggle features
+    const highContrastToggle = document.getElementById('highContrastToggle');
+    if (highContrastToggle) {
+        highContrastToggle.addEventListener('change', () => {
+            document.body.classList.toggle('accessibility-high-contrast');
+            saveAccessibilitySettings();
+        });
+    }
+
+    const largerTextToggle = document.getElementById('largerTextToggle');
+    if (largerTextToggle) {
+        largerTextToggle.addEventListener('change', () => {
+            document.body.classList.toggle('accessibility-larger-text');
+            saveAccessibilitySettings();
+        });
+    }
+
+    const dyslexiaFontToggle = document.getElementById('dyslexiaFontToggle');
+    if (dyslexiaFontToggle) {
+        dyslexiaFontToggle.addEventListener('change', () => {
+            document.body.classList.toggle('accessibility-dyslexia-font');
+            saveAccessibilitySettings();
+        });
+    }
+
+    const reducedMotionToggle = document.getElementById('reducedMotionToggle');
+    if (reducedMotionToggle) {
+        reducedMotionToggle.addEventListener('change', () => {
+            document.body.classList.toggle('accessibility-reduce-motion');
+            saveAccessibilitySettings();
+        });
+    }
+
+    const focusIndicatorToggle = document.getElementById('focusIndicatorToggle');
+    if (focusIndicatorToggle) {
+        focusIndicatorToggle.addEventListener('change', () => {
+            document.body.classList.toggle('accessibility-focus-indicators');
+            saveAccessibilitySettings();
+        });
+    }
+
+    // Reset to defaults
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            document.body.classList.remove(
+                'accessibility-high-contrast',
+                'accessibility-larger-text',
+                'accessibility-dyslexia-font',
+                'accessibility-reduce-motion',
+                'accessibility-focus-indicators'
+            );
+            document.getElementById('highContrastToggle').checked = false;
+            document.getElementById('largerTextToggle').checked = false;
+            document.getElementById('dyslexiaFontToggle').checked = false;
+            document.getElementById('reducedMotionToggle').checked = false;
+            document.getElementById('focusIndicatorToggle').checked = false;
+            localStorage.removeItem('accessibility_settings');
+        });
+    }
+
+    // Close panel when clicking outside
+    document.addEventListener('click', (e) => {
+        if (panel && toggleBtn && !panel.contains(e.target) && !toggleBtn.contains(e.target)) {
+            panel.setAttribute('aria-hidden', 'true');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+});
+
+/* ============================================================
    MODAL SYSTEM
 ============================================================ */
 const modalButtons = document.querySelectorAll('[data-modal-target]');
@@ -140,11 +274,37 @@ modalButtons.forEach(btn => {
             }, 100);
         }
 
-        // VALIDATE HOTEL SELECTION before opening calendar
+        // If opening the booking modal from another control (e.g. hero button),
+        // ensure `selectedHotel` reflects the current select value in the form.
+        if (target === '#bookingModal') {
+            const hotelSelectElem = document.getElementById('hotelSelect');
+            if (hotelSelectElem) {
+                const val = hotelSelectElem.value;
+                if (val && val !== '') {
+                    selectedHotel = val;
+                    const opt = hotelSelectElem.options[hotelSelectElem.selectedIndex];
+                    selectedHotelPrice = parseFloat(opt?.dataset?.price) || selectedHotelPrice;
+                }
+            }
+        }
+
+        // VALIDATE HOTEL SELECTION and guest counts before opening calendar
         if (target === '#calendarModal') {
-            if (!selectedHotel || selectedHotel === '') {
+            // prefer reading the current select value if present (handles opening from hero)
+            const hotelSelectElem = document.getElementById('hotelSelect');
+            const currentHotel = hotelSelectElem ? hotelSelectElem.value : selectedHotel;
+
+            if (!currentHotel || currentHotel === '') {
                 e.preventDefault();
                 alert('Please select a hotel first.');
+                return;
+            }
+            // Ensure at least 1 adult is selected in the booking start form
+            const adultsElem = document.getElementById('numAdults');
+            const adultsCount = adultsElem ? (parseInt(adultsElem.value, 10) || 0) : 0;
+            if (!Number.isInteger(adultsCount) || adultsCount < 1) {
+                e.preventDefault();
+                alert('Please select at least 1 adult for a hotel booking.');
                 return;
             }
         }
@@ -210,9 +370,11 @@ function loadUserDataForBooking() {
                 
                 if (visitorEmail) visitorEmail.value = data.user.email || '';
                 if (visitorPhone) visitorPhone.value = data.user.phone || '';
-                
-                // Store name in window variable for later use
+
+                // Store user info in window variables for later use
                 window.currentUserName = data.user.name || '';
+                window.currentUserEmail = data.user.email || '';
+                window.currentUserPhone = data.user.phone || '';
             }
         })
         .catch(e => console.error('Error loading user data:', e));
@@ -462,6 +624,7 @@ if (signupForm) {
     signupForm.addEventListener('submit', (e) => {
         const name = document.getElementById('signupName').value || '';
         const email = document.getElementById('signupEmail').value || '';
+        const phoneRaw = (document.getElementById('signupPhone') && document.getElementById('signupPhone').value) || '';
         const password = document.getElementById('signupPassword').value || '';
 
         if (!name.trim()) {
@@ -473,6 +636,14 @@ if (signupForm) {
         if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
             e.preventDefault();
             alert('Please enter a valid email address.');
+            return;
+        }
+
+        // validate phone length (count digits only)
+        const phoneDigits = phoneRaw.replace(/\D/g, '');
+        if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+            e.preventDefault();
+            alert('Please enter a valid phone number (7 to 15 digits).');
             return;
         }
 
@@ -497,13 +668,19 @@ function storeBooking(paymentMethod) {
         const booking = window.hotelBookingData || {};
         formData.append('store_hotel_booking', '1');
         formData.append('hotel_name', booking.hotel);
-        formData.append('adults', booking.adults);
+        // ensure adults default to 1 if missing
+        const adultsCount = (booking.adults !== undefined && booking.adults !== null) ? booking.adults : 1;
+        formData.append('adults', adultsCount);
         formData.append('children', booking.children);
         formData.append('check_in', checkInDate);
         formData.append('check_out', checkOutDate);
-        formData.append('guest_name', booking.name);
-        formData.append('guest_email', booking.email);
-        formData.append('guest_phone', booking.phone);
+        // Fill guest details from booking or fallback to logged-in user info
+        const guestName = booking.name || window.currentUserName || '';
+        const guestEmail = booking.email || window.currentUserEmail || '';
+        const guestPhone = booking.phone || window.currentUserPhone || '';
+        formData.append('guest_name', guestName);
+        formData.append('guest_email', guestEmail);
+        formData.append('guest_phone', guestPhone);
         formData.append('total_price', booking.hotelTotal);
         formData.append('nights', booking.nights);
 
@@ -511,8 +688,13 @@ function storeBooking(paymentMethod) {
             .then(r => r.json())
             .then(data => {
                 if (data.success) {
+                    alert('Hotel booking confirmed');
                     console.log('Hotel booking stored:', data.booking_id);
+                    // Refresh user/admin bookings
+                    try { loadUserBookings(); } catch (e) {}
+                    try { loadAdminData(); } catch (e) {}
                 } else {
+                    alert('Error storing hotel booking: ' + (data.error || 'Unknown error'));
                     console.error('Error storing hotel booking:', data.error);
                 }
             })
@@ -532,8 +714,13 @@ function storeBooking(paymentMethod) {
             .then(r => r.json())
             .then(data => {
                 if (data.success) {
+                    alert('Zoo visit booking confirmed');
                     console.log('Zoo visit booking stored:', data.booking_id);
+                    // Refresh user/admin bookings
+                    try { loadUserBookings(); } catch (e) {}
+                    try { loadAdminData(); } catch (e) {}
                 } else {
+                    alert('Error storing zoo booking: ' + (data.error || 'Unknown error'));
                     console.error('Error storing zoo booking:', data.error);
                 }
             })
@@ -699,14 +886,18 @@ document.getElementById('visitorNextBtn').addEventListener('click', () => {
     const name = window.currentUserName || '';
     const email = document.getElementById('visitorEmail').value;
     const phone = document.getElementById('visitorPhone').value;
-    const adults = parseInt(document.getElementById('numAdults').value) || 1;
+    const adults = parseInt(document.getElementById('numAdults').value, 10) || 0;
     const children = parseInt(document.getElementById('numChildren').value) || 0;
     
     if (!name) {
         alert('Error loading user name. Please refresh the page.');
         return;
     }
-    
+    // Validate adult count (must be at least 1)
+    if (!Number.isInteger(adults) || adults < 1) {
+        alert('Please select at least 1 adult for a hotel booking.');
+        return;
+    }
     if (!selectedHotel || selectedHotel === '') {
         alert('Please select a hotel');
         return;
@@ -994,13 +1185,19 @@ if (visitTimeNextBtn) {
 document.getElementById('visitDetailsForm').addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const adults = parseInt(document.getElementById('visitAdults').value) || 0;
-    const children = parseInt(document.getElementById('visitChildren').value) || 0;
-    const seniors = parseInt(document.getElementById('visitSeniors').value) || 0;
+    const adults = parseInt(document.getElementById('visitAdults').value, 10) || 0;
+    const children = parseInt(document.getElementById('visitChildren').value, 10) || 0;
+    const seniors = parseInt(document.getElementById('visitSeniors').value, 10) || 0;
     const selectedTime = document.getElementById('visitTimeSelect').value;
 
     if (!selectedTime || selectedTime === '') {
         alert('Please select a time slot.');
+        return;
+    }
+
+    // Ensure at least one adult is present for a visit
+    if (!Number.isInteger(adults) || adults < 1) {
+        alert('Please select at least 1 adult for a zoo visit.');
         return;
     }
 
@@ -1087,4 +1284,202 @@ document.querySelectorAll('.footer-link').forEach(link => {
         e.preventDefault();
         openModal('#footerWipModal');
     });
+});
+
+/* ============================================================
+   ADMIN PANEL
+============================================================ */
+let adminVolumeChart = null;
+let adminRevenueChart = null;
+
+function loadAdminData() {
+    // Fetch all bookings
+    fetch('index.php?admin_fetch_bookings=1')
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                renderAdminBookings(data.hotels, data.visits);
+            }
+        })
+        .catch(e => console.error('Error loading admin bookings:', e));
+
+    // Fetch stats and render charts
+    fetch('index.php?admin_fetch_stats=1')
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                renderAdminCharts(data.volume, data.revenue);
+            }
+        })
+        .catch(e => console.error('Error loading admin stats:', e));
+}
+
+function renderAdminBookings(hotels, visits) {
+    const container = document.getElementById('adminBookingsContainer');
+    if (!container) return;
+
+    let totalBookings = hotels.length + visits.length;
+    document.getElementById('adminTotalBookings').textContent = totalBookings;
+
+    let html = '';
+
+    // Hotel bookings
+    hotels.forEach(h => {
+        html += `
+            <div class="admin-booking-item">
+                <div class="booking-info">
+                    <p><strong>Hotel:</strong> ${h.hotel_name}</p>
+                    <p><strong>Guest:</strong> ${h.guest_name} (${h.email})</p>
+                    <p><strong>Check-in:</strong> ${h.check_in} | <strong>Check-out:</strong> ${h.check_out}</p>
+                    <p><strong>Revenue:</strong> £${parseFloat(h.total_price).toFixed(2)}</p>
+                </div>
+                <button class="booking-delete" onclick="deleteAdminBooking('hotel', ${h.id})">Delete</button>
+            </div>
+        `;
+    });
+
+    // Visit bookings
+    visits.forEach(v => {
+        html += `
+            <div class="admin-booking-item">
+                <div class="booking-info">
+                    <p><strong>Zoo Visit:</strong> ${v.visit_date} @ ${v.visit_time}</p>
+                    <p><strong>Visitor:</strong> ${v.name || 'N/A'} (${v.email || 'N/A'})</p>
+                    <p><strong>Visitors:</strong> ${v.adults} adults, ${v.children} children, ${v.seniors} seniors</p>
+                    <p><strong>Revenue:</strong> £${parseFloat(v.total_price).toFixed(2)}</p>
+                </div>
+                <button class="booking-delete" onclick="deleteAdminBooking('visit', ${v.id})">Delete</button>
+            </div>
+        `;
+    });
+
+    if (html === '') {
+        html = '<p style="text-align:center;color:#666;padding:20px;">No bookings found.</p>';
+    }
+
+    container.innerHTML = html;
+}
+
+function renderAdminCharts(volumeData, revenueData) {
+    // Calculate totals
+    let totalRevenue = 0;
+    revenueData.forEach(r => {
+        totalRevenue += parseFloat(r.revenue || 0);
+    });
+    document.getElementById('adminTotalRevenue').textContent = '£' + totalRevenue.toFixed(2);
+
+    // Prepare chart data
+    const days = [];
+    const volumes = [];
+    const revenues = [];
+
+    volumeData.forEach(v => {
+        days.push(new Date(v.day).toLocaleDateString('en-GB', { month: 'short', day: 'numeric' }));
+        volumes.push(v.count);
+    });
+
+    revenueData.forEach(r => {
+        revenues.push(parseFloat(r.revenue || 0));
+    });
+
+    // Ensure we have matching arrays
+    const maxLen = Math.max(volumes.length, revenues.length);
+    while (volumes.length < maxLen) volumes.push(0);
+    while (revenues.length < maxLen) revenues.push(0);
+    while (days.length < maxLen) days.push('');
+
+    // Destroy old charts if they exist
+    if (adminVolumeChart) adminVolumeChart.destroy();
+    if (adminRevenueChart) adminRevenueChart.destroy();
+
+    // Volume Chart
+    const volumeCtx = document.getElementById('adminVolumeChart');
+    if (volumeCtx) {
+        adminVolumeChart = new Chart(volumeCtx, {
+            type: 'line',
+            data: {
+                labels: days,
+                datasets: [{
+                    label: 'Bookings per Day',
+                    data: volumes,
+                    borderColor: '#32702A',
+                    backgroundColor: 'rgba(50, 112, 42, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { display: true } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    }
+
+    // Revenue Chart
+    const revenueCtx = document.getElementById('adminRevenueChart');
+    if (revenueCtx) {
+        adminRevenueChart = new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: days,
+                datasets: [{
+                    label: 'Revenue per Day (£)',
+                    data: revenues,
+                    backgroundColor: '#32702A',
+                    borderColor: '#2D5630',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { display: true } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    }
+}
+
+function deleteAdminBooking(type, id) {
+    if (!confirm(`Are you sure you want to delete this ${type} booking?`)) return;
+
+    const formData = new FormData();
+    formData.append('admin_delete_booking', '1');
+    formData.append('type', type);
+    formData.append('id', id);
+
+    fetch('index.php', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                alert('Booking deleted');
+                loadAdminData();
+            } else {
+                alert('Error: ' + (data.error || 'Unknown error'));
+            }
+        })
+        .catch(e => {
+            alert('Error deleting booking');
+            console.error(e);
+        });
+}
+
+// Wire admin modal to load data when opened
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if admin modal exists and hook openModal
+    const origOpenModal = window.openModal;
+    window.openModal = function(id) {
+        if (id === '#adminModal') {
+            loadAdminData();
+        }
+        return origOpenModal.call(this, id);
+    };
+
+    // Wire refresh button
+    const refreshBtn = document.getElementById('adminRefreshBtn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', loadAdminData);
+    }
 });
