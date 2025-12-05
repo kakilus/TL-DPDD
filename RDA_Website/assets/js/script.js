@@ -214,6 +214,26 @@ function showCookieConsentIfNeeded() {
     }
 }
 
+/* ============================================================
+   AUTO-CHECK LOYALTY STATUS ON PAGE LOAD (after login)
+============================================================ */
+function checkAndUpdateLoyaltyStatus() {
+    // Fetch user bookings/loyalty data and update displays
+    fetch('index.php?fetch_bookings=1')
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                // Update loyalty displays based on user's membership
+                if (data.loyalty && data.loyalty.active) {
+                    updateLoyaltyDisplays(data.loyalty);
+                } else {
+                    updateLoyaltyDisplays(null);
+                }
+            }
+        })
+        .catch(e => console.error('Error checking loyalty status:', e));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // wire up cookie consent buttons
     const acceptAll = document.getElementById('acceptAllCookiesBtn');
@@ -394,6 +414,13 @@ function loadUserBookings() {
             if (!data.success) {
                 container.innerHTML = `<p style="color:red;">Error: ${data.error}</p>`;
                 return;
+            }
+
+            // Update loyalty displays based on user's membership
+            if (data.loyalty && data.loyalty.active) {
+                updateLoyaltyDisplays(data.loyalty);
+            } else {
+                updateLoyaltyDisplays(null);
             }
 
             let html = '';
@@ -1219,10 +1246,36 @@ document.getElementById('visitDetailsForm').addEventListener('submit', (e) => {
 let selectedTier = null;
 let membershipPrice = 0;
 
-/* When clicking a tier button */
-document.querySelectorAll('.join-tier').forEach(btn => {
-    btn.addEventListener('click', () => {
-        selectedTier = btn.getAttribute('data-tier');
+// Function to update loyalty tier displays based on user's membership status
+function updateLoyaltyDisplays(userLoyalty) {
+    document.querySelectorAll('.loyalty-tier-display').forEach(display => {
+        const tier = display.getAttribute('data-tier');
+        let html = '';
+        
+        if (userLoyalty && userLoyalty.tier && userLoyalty.active) {
+            // User has an active membership
+            if (userLoyalty.tier === tier) {
+                html = `<p style="font-weight:bold;color:#32702A;margin:0;padding:12px;text-align:center;">✓ Current Member</p>`;
+            } else {
+                html = `<button class="btn primary join-tier" data-tier="${tier}">Upgrade to ${tier}</button>`;
+            }
+        } else {
+            // User is not a member or membership inactive
+            html = `<button class="btn primary join-tier" data-tier="${tier}">Join ${tier}</button>`;
+        }
+        
+        display.innerHTML = html;
+    });
+    
+    // Re-attach event listeners to newly created buttons
+    attachJoinTierListeners();
+}
+
+// Function to attach listeners to join-tier buttons
+function attachJoinTierListeners() {
+    document.querySelectorAll('.join-tier').forEach(btn => {
+        btn.addEventListener('click', () => {
+            selectedTier = btn.getAttribute('data-tier');
 
         // Assign price
         if (selectedTier === "Bronze") membershipPrice = 0;
@@ -1234,8 +1287,9 @@ document.querySelectorAll('.join-tier').forEach(btn => {
             `Selected Tier: ${selectedTier}`;
 
         openModal('#loyaltyDetailsModal');
+        });
     });
-});
+}
 
 /* Details submitted */
 document.getElementById('loyaltyDetailsForm').addEventListener('submit', (e) => {
@@ -1468,6 +1522,13 @@ function deleteAdminBooking(type, id) {
 
 // Wire admin modal to load data when opened
 document.addEventListener('DOMContentLoaded', () => {
+    // Auto-check loyalty status on page load (runs after login redirect)
+    checkAndUpdateLoyaltyStatus();
+    
+    // Initialize loyalty displays on page load
+    // Initially show "Join" buttons, will update after user data loads if logged in
+    updateLoyaltyDisplays(null);
+    
     // Check if admin modal exists and hook openModal
     const origOpenModal = window.openModal;
     window.openModal = function(id) {

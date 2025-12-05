@@ -1,13 +1,24 @@
 <?php
 session_start();
 
-// connect to sqlite database
+// connect to MySQL (XAMPP defaults: host=127.0.0.1, port=3306)
+// Database name: zoo
+// Username/password: commonly `root` and empty password on XAMPP
 try {
-    $db = new PDO('sqlite:zoo.db');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dbHost = '127.0.0.1';
+    $dbPort = 3306;
+    $dbName = 'zoo';
+    $dbUser = 'root';
+    $dbPass = '';
+
+    $dsn = "mysql:host={$dbHost};port={$dbPort};dbname={$dbName};charset=utf8mb4";
+    $db = new PDO($dsn, $dbUser, $dbPass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ]);
 } catch (Exception $e) {
-    // fatal for our app — show a brief message
-    die('Database error: ' . htmlspecialchars($e->getMessage()));
+    // Helpful error for debugging — do not expose full message in production
+    die('Database connection failed. Please verify MySQL is running and the `zoo` database exists. Error: ' . htmlspecialchars($e->getMessage()));
 }
 
 /* =======================
@@ -361,32 +372,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['admin_fetch_stats'])) {
         $currentMonth = date('Y-m');
         
         // Volume: count bookings per day this month
-        $volumeStmt = $db->prepare('
-            SELECT DATE(created_at) as day, COUNT(*) as count
-            FROM (
-                SELECT created_at FROM hotel_bookings WHERE strftime("%Y-%m", created_at) = ?
-                UNION ALL
-                SELECT created_at FROM visit_bookings WHERE strftime("%Y-%m", created_at) = ?
-            )
-            GROUP BY day
-            ORDER BY day
-        ');
-        $volumeStmt->execute([$currentMonth, $currentMonth]);
-        $volumeData = $volumeStmt->fetchAll(PDO::FETCH_ASSOC);
+        // Query hotel and visit tables separately and merge in PHP for robustness
+        $hotelVolStmt = $db->prepare("SELECT DATE(created_at) as day, COUNT(*) as count FROM hotel_bookings WHERE DATE_FORMAT(created_at, '%Y-%m') = :month GROUP BY day ORDER BY day");
+        $hotelVolStmt->execute([':month' => $currentMonth]);
+        $hotelVol = $hotelVolStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $visitVolStmt = $db->prepare("SELECT DATE(created_at) as day, COUNT(*) as count FROM visit_bookings WHERE DATE_FORMAT(created_at, '%Y-%m') = :month GROUP BY day ORDER BY day");
+        $visitVolStmt->execute([':month' => $currentMonth]);
+        $visitVol = $visitVolStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Merge volumes by day
+        $volMap = [];
+        foreach ($hotelVol as $r) { $volMap[$r['day']] = ($volMap[$r['day']] ?? 0) + intval($r['count']); }
+        foreach ($visitVol as $r) { $volMap[$r['day']] = ($volMap[$r['day']] ?? 0) + intval($r['count']); }
+
+        // Convert to sorted array
+        ksort($volMap);
+        $volumeData = [];
+        foreach ($volMap as $day => $count) { $volumeData[] = ['day' => $day, 'count' => $count]; }
 
         // Revenue: sum totals per day this month
-        $revenueStmt = $db->prepare('
-            SELECT DATE(created_at) as day, SUM(total_price) as revenue
-            FROM (
-                SELECT created_at, total_price FROM hotel_bookings WHERE strftime("%Y-%m", created_at) = ?
-                UNION ALL
-                SELECT created_at, total_price FROM visit_bookings WHERE strftime("%Y-%m", created_at) = ?
-            )
-            GROUP BY day
-            ORDER BY day
-        ');
-        $revenueStmt->execute([$currentMonth, $currentMonth]);
-        $revenueData = $revenueStmt->fetchAll(PDO::FETCH_ASSOC);
+        $hotelRevStmt = $db->prepare("SELECT DATE(created_at) as day, SUM(total_price) as revenue FROM hotel_bookings WHERE DATE_FORMAT(created_at, '%Y-%m') = :month GROUP BY day ORDER BY day");
+        $hotelRevStmt->execute([':month' => $currentMonth]);
+        $hotelRev = $hotelRevStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $visitRevStmt = $db->prepare("SELECT DATE(created_at) as day, SUM(total_price) as revenue FROM visit_bookings WHERE DATE_FORMAT(created_at, '%Y-%m') = :month GROUP BY day ORDER BY day");
+        $visitRevStmt->execute([':month' => $currentMonth]);
+        $visitRev = $visitRevStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Merge revenues by day
+        $revMap = [];
+        foreach ($hotelRev as $r) { $revMap[$r['day']] = ($revMap[$r['day']] ?? 0) + floatval($r['revenue']); }
+        foreach ($visitRev as $r) { $revMap[$r['day']] = ($revMap[$r['day']] ?? 0) + floatval($r['revenue']); }
+
+        ksort($revMap);
+        $revenueData = [];
+        foreach ($revMap as $day => $rev) { $revenueData[] = ['day' => $day, 'revenue' => $rev]; }
 
         echo json_encode(['success' => true, 'volume' => $volumeData, 'revenue' => $revenueData]);
     } catch (Exception $e) {

@@ -26,7 +26,7 @@ function loyaltyButton($tier) {
                     <li>Event notifications</li>
                     <li>Member-only hours</li>
                 </ul>
-                <?php loyaltyButton("Bronze"); ?>
+                <div class="loyalty-tier-display" data-tier="Bronze"></div>
             </div>
 
             <div class="loyalty-card silver featured">
@@ -41,7 +41,7 @@ function loyaltyButton($tier) {
                     <li>Priority event registration</li>
                     <li>Quarterly behind-scenes tours</li>
                 </ul>
-                <?php loyaltyButton("Silver"); ?>
+                <div class="loyalty-tier-display" data-tier="Silver"></div>
             </div>
 
             <div class="loyalty-card gold">
@@ -57,7 +57,7 @@ function loyaltyButton($tier) {
                     <li>Guest passes (4 per year)</li>
                     <li>VIP animal encounters</li>
                 </ul>
-                <?php loyaltyButton("Gold"); ?>
+                <div class="loyalty-tier-display" data-tier="Gold"></div>
             </div>
 
         </div>
