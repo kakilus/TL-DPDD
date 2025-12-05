@@ -2,7 +2,8 @@
     <div class="container">
         <div class="footer-grid">
 
-            <!-- Logo & Description -->
+            <!-- Footer -->
+            
             <div>
                 <h3 class="footer-logo">Riget Zoo Adventures</h3>
                 <p>Dedicated to conservation, education, and unforgettable wildlife experiences.</p>

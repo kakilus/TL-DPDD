@@ -1,6 +1,3 @@
-/* ===========================
-   GLOBAL STYLES & VARIABLES
-   =========================== */
 :root {
     /* MAIN COLOR PALETTE */
     --green-darkest: #24382F;
@@ -34,7 +31,7 @@
     --container-width: 1280px;
 }
 
-/* Base grid */
+/* Global styles */
 * {
     margin: 0;
     padding: 0;
@@ -109,9 +106,6 @@ h2 {
     width: 100%;
 }
 
-/* ===========================
-   HEADER
-   =========================== */
 .header {
     position: sticky;
     top: 0;
@@ -554,6 +548,22 @@ h2 {
     .hero {
         height: 500px;
     }
+
+    /* Accessibility panel adjustments on very small screens */
+    .accessibility-toggle {
+        bottom: 16px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+    }
+
+    .accessibility-panel {
+        bottom: 80px;
+        right: 8px;
+        left: 8px;
+        width: auto;
+    }
 }
 
 /* ============================================================
@@ -577,6 +587,7 @@ h2 {
     display: flex;
 }
 
+
 .modal-content {
     background: white;
     padding: 24px;
@@ -584,10 +595,7 @@ h2 {
     max-width: 450px;
     width: 100%;
     position: relative;
-}
-
-/* Allow modal content to scroll when content is tall (e.g. PayPal menus) */
-.modal-content {
+    /* Allow modal content to scroll when content is tall (e.g. PayPal menus) */
     max-height: 90vh;
     overflow: auto;
 }
@@ -1026,23 +1034,7 @@ body.accessibility-focus-indicators *:focus {
     outline-offset: 3px !important;
 }
 
-/* Mobile adjustments */
-@media (max-width: 480px) {
-    .accessibility-toggle {
-        bottom: 16px;
-        right: 16px;
-        width: 48px;
-        height: 48px;
-        font-size: 24px;
-    }
-
-    .accessibility-panel {
-        bottom: 80px;
-        right: 8px;
-        left: 8px;
-        width: auto;
-    }
-}
+/* Mobile adjustments handled earlier */
 
 /* When a modal is open, lock body scrolling */
 body.modal-open {

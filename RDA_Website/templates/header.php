@@ -1,18 +1,16 @@
 <?php
-// Ensure session is active
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
 
+<!-- Header -->
 <header class="header">
     <div class="container header-inner">
         <div class="logo">ZOO</div>
 
         <?php if (isset($_SESSION['username'])): ?>
-            <!-- Show YOUR BOOKINGS button when logged in -->
             <button class="login-btn" data-modal-target="#bookingsModal">Your Bookings</button>
-            <!-- Show ADMIN PANEL button for root@gmail.com -->
             <?php if ($_SESSION['username'] === 'root@gmail.com'): ?>
                 <button class="login-btn" style="background:var(--amber-600);" data-modal-target="#adminModal">Admin Panel</button>
             <?php endif; ?>
@@ -28,15 +26,13 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <div>
             <?php if (!isset($_SESSION['username'])): ?>
-                <!-- Show LOGIN button (opens modal) -->
-                <button class="login-btn" data-modal-target="#loginModal">Login</button>
-            <?php else: ?>
-                <!-- Show user email and LOGOUT button -->
-                <span class="user-email" style="font-weight:600;"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                <form method="POST" style="display:inline;margin:0;">
-                    <button class="login-btn" name="logout">Logout</button>
-                </form>
-            <?php endif; ?>
+                    <button class="login-btn" data-modal-target="#loginModal">Login</button>
+                <?php else: ?>
+                    <span class="user-email" style="font-weight:600;"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                    <form method="POST" style="display:inline;margin:0;">
+                        <button class="login-btn" name="logout">Logout</button>
+                    </form>
+                <?php endif; ?>
         </div>
 
         <button class="hamburger" aria-label="Open mobile menu">

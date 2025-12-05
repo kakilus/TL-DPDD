@@ -58,9 +58,7 @@
     </div>
 </div>
 
-<!-- ============================================================
-     ZOO VISIT BOOKING — VISITOR COUNTS
-============================================================ -->
+<!-- Visitor Numbers -->
 <div id="visitDetailsModal" class="modal">
     <div class="modal-content">
         <span class="close" data-close>&times;</span>
@@ -85,9 +83,7 @@
     </div>
 </div>
 
-<!-- ============================================================
-     ZOO VISIT BOOKING — CONFIRMATION
-============================================================ -->
+<!-- Visit Confirmation -->
 <div id="visitConfirmModal" class="modal">
     <div class="modal-content">
         <span class="close" data-close>&times;</span>
@@ -132,7 +128,7 @@
     </div>
 </div>
 
-<!-- Visitor Info Modal -->
+<!-- Visitor Info -->
 <div class="modal" id="visitorModal" aria-hidden="true">
     <div class="modal-content">
         <span class="close" data-close>&times;</span>
@@ -201,9 +197,7 @@
 </div>
 
 
-<!-- ============================================================
-     VISIT DATE PICKER + TIME SLOTS
-============================================================ -->
+<!-- Visit Date Picker -->
 <div id="visitBookingCalendar" class="modal">
     <div class="modal-content">
         <span class="close" data-close>&times;</span>
@@ -215,6 +209,7 @@
     </div>
 </div>
 
+<!-- Visit Time Modal -->
 <div id="visitTimeModal" class="modal">
     <div class="modal-content">
         <span class="close" data-close>&times;</span>

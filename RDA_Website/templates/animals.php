@@ -77,14 +77,7 @@
                 </div>
             </div>
 
-            <!--<div class="animal-card">
-                <img src="assets/img/chud-chudjak.gif" alt="chud">
-                <div class="card-body">
-                    <h3>chud</h3>
-                    <p>THE WEST HAS FALLEN 😢😢</p>
-                    <p class="learn-link"><strong>Feeding Time:</strong> 5:00 PM (he demands it)</p>
-                </div>
-            </div>-->
+            <!-- Additional animals omitted -->
 
         </div>
     </div>
