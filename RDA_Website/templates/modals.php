@@ -224,9 +224,7 @@
 </div>
 
 
-<!-- ============================================================
-     LOYALTY JOIN MODALS
-============================================================ -->
+<!-- LOYALTY JOIN MODALS -->
 <div id="loyaltyDetailsModal" class="modal">
     <div class="modal-content">
         <span class="close" data-close>&times;</span>
@@ -285,9 +283,7 @@
     </div>
 </div>
 
-<!-- ============================================================
-     YOUR BOOKINGS MODAL
-============================================================ -->
+<!-- YOUR BOOKINGS MODAL -->
 <div id="bookingsModal" class="modal">
     <div class="modal-content">
         <span class="close" data-close>&times;</span>
@@ -299,16 +295,13 @@
     </div>
 </div>
 
-<!-- ============================================================
-     BOOKING DETAILS MODAL (for viewing expanded info)
-============================================================ -->
+<!-- BOOKING DETAILS MODAL  -->
 <div id="bookingDetailsModal" class="modal">
     <div class="modal-content">
         <span class="close" data-close>&times;</span>
         <h2 id="detailsModalTitle">Booking Details</h2>
         
         <div id="detailsContent" style="padding:12px 0;">
-            <!-- Content will be populated dynamically -->
         </div>
     </div>
 </div>
@@ -325,7 +318,7 @@
     </div>
 </div>
 
-<!-- Accessibility Toggle Button (sticky at bottom) -->
+<!-- Accessibility Toggle Button -->
 <button id="accessibilityToggleBtn" class="accessibility-toggle" aria-label="Accessibility options" aria-expanded="false" title="Accessibility settings">
     ♿
 </button>
