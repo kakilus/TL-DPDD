@@ -40,6 +40,28 @@ if (session_status() === PHP_SESSION_NONE) {
         </button>
     </div>
 
+    <!-- Second header row: on mobile/ small screen when not enough space for buttons
+      as they would disappear before. -->
+    <div class="header-row-2 container">
+        <div class="header-row-2-left">
+            <?php if (isset($_SESSION['username'])): ?>
+                <button class="header-action-btn" data-modal-target="#bookingsModal">Your Bookings</button>
+            <?php endif; ?>
+        </div>
+        <div class="header-row-2-right">
+            <?php if (!isset($_SESSION['username'])): ?>
+                <button class="header-action-btn" data-modal-target="#loginModal">Login</button>
+            <?php else: ?>
+                <?php if ($_SESSION['username'] === 'root@gmail.com'): ?>
+                    <button class="header-action-btn" style="background:var(--amber-600);" data-modal-target="#adminModal">Admin Panel</button>
+                <?php endif; ?>
+                <form method="POST" style="display:inline;margin:0;">
+                    <button class="header-action-btn" name="logout">Logout</button>
+                </form>
+            <?php endif; ?>
+        </div>
+    </div>
+
     <nav class="mobile-nav" id="mobileNav">
         <?php if (isset($_SESSION['username'])): ?>
             <button style="background:var(--green-600);color:white;padding:8px 12px;border-radius:4px;border:none;cursor:pointer;font-weight:600;width:100%;margin-bottom:8px;" data-modal-target="#bookingsModal">Your Bookings</button>

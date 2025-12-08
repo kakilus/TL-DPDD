@@ -152,6 +152,25 @@ h2 {
     align-items: center;
 }
 
+/* Second header row (mobile) - hidden on desktop */
+.header-row-2 {
+    display: none;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 16px;
+}
+.header-row-2 .header-action-btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    background: var(--green-600);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.header-row-2 .header-action-btn[style] { /* preserve any inline color for admin */ }
+
+
 /* Desktop Nav */
 .desktop-nav {
     display: flex;
@@ -529,6 +548,12 @@ h2 {
 
     .mobile-nav.open {
         display: flex;
+    }
+
+    /* Show the second header row on small screens */
+    .header-row-2 {
+        display: flex;
+        justify-content: space-between;
     }
 
     .footer-grid {

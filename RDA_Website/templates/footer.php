@@ -2,7 +2,9 @@
     <div class="container">
         <div class="footer-grid">
 
-            <!-- Footer -->
+            <!-- Footer 
+            - Each div is a different column of the footer. 
+            -->
             
             <div>
                 <h3 class="footer-logo">Riget Zoo Adventures</h3>

@@ -4,16 +4,49 @@
 const hamburger = document.querySelector('.hamburger');
 const mobileNav = document.querySelector('.mobile-nav');
 
-hamburger.addEventListener('click', () => {
-    mobileNav.classList.toggle('open');
-});
+if (hamburger && mobileNav) {
+    // Initialize aria attributes for accessibility
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileNav.setAttribute('aria-hidden', 'true');
 
-/* Close mobile menu when clicking outside */
-document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+    const openMobileNav = () => {
+        mobileNav.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        mobileNav.setAttribute('aria-hidden', 'false');
+    };
+
+    const closeMobileNav = () => {
         mobileNav.classList.remove('open');
-    }
-});
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+    };
+
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (mobileNav.classList.contains('open')) closeMobileNav();
+        else openMobileNav();
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+            closeMobileNav();
+        }
+    });
+
+    // Close on Escape key for accessibility
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+            closeMobileNav();
+            hamburger.focus();
+        }
+    });
+
+    // Close when a link inside the mobile nav is clicked (improves UX)
+    mobileNav.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('click', () => closeMobileNav());
+    });
+}
 
 /* ============================================================
    ACCESSIBILITY PANEL & FEATURES

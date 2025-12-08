@@ -3,7 +3,6 @@ function loyaltyButton($tier) {
     if (isset($_SESSION['username'])) {
         echo '<button class="btn primary join-tier" data-tier="'.$tier.'">Join '.$tier.'</button>';
     } else {
-        // Open login modal instead of linking to login.php
         echo '<button class="btn primary" data-modal-target="#loginModal">Login to Join</button>';
     }
 }

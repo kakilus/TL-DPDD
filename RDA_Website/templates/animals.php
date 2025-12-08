@@ -2,7 +2,7 @@
     <div class="container">
         <h2>Meet Our Animals</h2>
         <p class="section-subtitle">Explore the incredible wildlife we care for and protect.</p>
-
+        <!-- Below are the animal boxes with a name and description -->
         <div class="animal-grid">
 
             <div class="animal-card">
@@ -60,24 +60,24 @@
             </div>
 
             <div class="animal-card">
-                <img src="assets/img/animal-chill-monkey.gif" alt="chill asf monkey">
+                <img src="assets/img/animal-snub-monkey.jpg" alt="Golden Snub-Nosed Monkey">
                 <div class="card-body">
-                    <h3>chill monky</h3>
-                    <p>very chill very dangerous monky.</p>
+                    <h3>Golden Snub-Nosed Monkey</h3>
+                    <p>A rare primate from the misty mountains of China, with striking golden fur.</p>
                     <p class="learn-link"><strong>Feeding Time:</strong> 5:00 PM</p>
                 </div>
             </div>
 
             <div class="animal-card">
-                <img src="assets/img/cat-dance.gif" alt="GURT CAT">
+                <img src="assets/img/animal-clouded-leopard.jpg" alt="Clouded Leopard">
                 <div class="card-body">
-                    <h3>gurt cat</h3>
-                    <p>ts cat very smrt but vry dangrous will appear behind u.</p>
+                    <h3>Clouded Leopard</h3>
+                    <p>A mysterious jungle cat from Southeast Asia, admired for its smoky patterned coat and remarkable climbing ability.</p>
                     <p class="learn-link"><strong>Feeding Time:</strong> 12:00 PM (approach carefully)</p>
                 </div>
             </div>
 
-            <!-- Additional animals omitted -->
+            
 
         </div>
     </div>
