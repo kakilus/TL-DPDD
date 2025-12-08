@@ -1,4 +1,5 @@
 <?php
+# Determine pre-existing memership tier if logged in
 function loyaltyButton($tier) {
     if (isset($_SESSION['username'])) {
         echo '<button class="btn primary join-tier" data-tier="'.$tier.'">Join '.$tier.'</button>';
