@@ -14,7 +14,7 @@ function loyaltyButton($tier) {
     <div class="container">
         <h2>Join Our Loyalty Program</h2>
         <div class="loyalty-grid">
-
+            <!-- Bronze Tier Card -->
             <div class="loyalty-card bronze">
                 <div class="tier-header bronze">
                     <h3>Bronze</h3>
@@ -28,7 +28,7 @@ function loyaltyButton($tier) {
                 </ul>
                 <div class="loyalty-tier-display" data-tier="Bronze"></div>
             </div>
-
+            <!-- Silver Tier Card -->
             <div class="loyalty-card silver featured">
                 <div class="tier-header silver">
                     <h3>Silver</h3>
@@ -43,7 +43,7 @@ function loyaltyButton($tier) {
                 </ul>
                 <div class="loyalty-tier-display" data-tier="Silver"></div>
             </div>
-
+            <!-- Gold Tier Card -->
             <div class="loyalty-card gold">
                 <div class="tier-header gold">
                     <h3>Gold</h3>
