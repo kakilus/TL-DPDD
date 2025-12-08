@@ -3,6 +3,8 @@
         <h2>Plan Your Visit</h2>
 
         <div class="visit-grid">
+
+            <!-- Opening Hours Card -->
             <div class="visit-card">
                 <div class="icon-circle">🕒</div>
                 <h3>Hours</h3>
@@ -11,6 +13,7 @@
                 <p>Last entry 1 hour before closing</p>
             </div>
 
+            <!-- Admission Card -->
             <div class="visit-card">
                 <div class="icon-circle">🎟️</div>
                 <h3>Admission</h3>
@@ -19,6 +22,7 @@
                 <p>Seniors (65+): £24.99</p>
             </div>
 
+            <!-- Location Card -->
             <div class="visit-card">
                 <div class="icon-circle">📍</div>
                 <h3>Location</h3>
@@ -28,7 +32,7 @@
             </div>
         </div>
 
-        
+        <!-- Book Visit Button -->
         <div style="text-align:center; margin-top:40px;">
             <button class="btn primary" data-modal-target="#visitBookingCalendar">
             Book Zoo Visit
