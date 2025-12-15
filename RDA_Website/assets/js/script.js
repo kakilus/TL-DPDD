@@ -5,7 +5,7 @@ const hamburger = document.querySelector('.hamburger');
 const mobileNav = document.querySelector('.mobile-nav');
 
 if (hamburger && mobileNav) {
-    // Initialize aria attributes for accessibility
+
     hamburger.setAttribute('aria-expanded', 'false');
     mobileNav.setAttribute('aria-hidden', 'true');
 
@@ -27,14 +27,14 @@ if (hamburger && mobileNav) {
         else openMobileNav();
     });
 
-    // Close mobile menu when clicking outside
+    
     document.addEventListener('click', (e) => {
         if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
             closeMobileNav();
         }
     });
 
-    // Close on Escape key for accessibility
+    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
             closeMobileNav();
@@ -42,7 +42,7 @@ if (hamburger && mobileNav) {
         }
     });
 
-    // Close when a link inside the mobile nav is clicked (improves UX)
+   
     mobileNav.querySelectorAll('a, button').forEach(el => {
         el.addEventListener('click', () => closeMobileNav());
     });
@@ -55,7 +55,7 @@ function loadAccessibilitySettings() {
     try {
         const settings = JSON.parse(localStorage.getItem('accessibility_settings')) || {};
         
-        // Apply each setting if it was enabled
+        
         if (settings.highContrast) {
             document.body.classList.add('accessibility-high-contrast');
             document.getElementById('highContrastToggle').checked = true;
@@ -101,10 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const panel = document.getElementById('accessibilityPanel');
     const resetBtn = document.getElementById('resetAccessibilityBtn');
 
-    // Load saved settings on page load
+    
     loadAccessibilitySettings();
 
-    // Toggle panel visibility
+
     if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
             const isHidden = panel.getAttribute('aria-hidden') === 'true';
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Wire all checkboxes to toggle features
+    
     const highContrastToggle = document.getElementById('highContrastToggle');
     if (highContrastToggle) {
         highContrastToggle.addEventListener('change', () => {
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Reset to defaults
+    
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
             document.body.classList.remove(
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Close panel when clicking outside
+    
     document.addEventListener('click', (e) => {
         if (panel && toggleBtn && !panel.contains(e.target) && !toggleBtn.contains(e.target)) {
             panel.setAttribute('aria-hidden', 'true');
@@ -193,27 +193,27 @@ const switchLinks = document.querySelectorAll('[data-switch]');
 function openModal(id) {
     const modal = document.querySelector(id);
     modal.classList.add('active');
-    // lock background scrolling while modal open
+    
     document.body.classList.add('modal-open');
     
-    // When bookings modal opens, load bookings
+    
     if (id === '#bookingsModal') {
         loadUserBookings();
     }
     
-    // When calendar modal opens, render the calendar
+    
     if (id === '#calendarModal') {
         renderCalendar();
     }
     
-    // When visitor modal opens, load user data
+    
     if (id === '#visitorModal') {
         loadUserDataForBooking();
     }
     
     // When payment modal opens, render PayPal buttons and update price display
     if (id === '#paymentModal') {
-        // Update payment price display
+        
         const displayPrice = window.paymentAmount || '0.00';
         const priceDisplay = document.getElementById('paymentPriceDisplay');
         if (priceDisplay) {
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 openModal('#footerWipModal');
             } catch (err) {
-                // fallback: show alert
+                // fallback
                 alert('Cookie policy coming soon');
             }
         });
@@ -314,7 +314,7 @@ modalButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         const target = btn.getAttribute('data-modal-target');
 
-        // Capture hotel selection from data attributes (from hotel cards)
+        // Capture hotel selection from data attributes
         if (btn.dataset.hotel && btn.dataset.price) {
             selectedHotel = btn.dataset.hotel;
             selectedHotelPrice = parseFloat(btn.dataset.price);
@@ -327,8 +327,7 @@ modalButtons.forEach(btn => {
             }, 100);
         }
 
-        // If opening the booking modal from another control (e.g. hero button),
-        // ensure `selectedHotel` reflects the current select value in the form.
+
         if (target === '#bookingModal') {
             const hotelSelectElem = document.getElementById('hotelSelect');
             if (hotelSelectElem) {
@@ -341,9 +340,9 @@ modalButtons.forEach(btn => {
             }
         }
 
-        // VALIDATE HOTEL SELECTION and guest counts before opening calendar
+ 
         if (target === '#calendarModal') {
-            // prefer reading the current select value if present (handles opening from hero)
+            
             const hotelSelectElem = document.getElementById('hotelSelect');
             const currentHotel = hotelSelectElem ? hotelSelectElem.value : selectedHotel;
 
@@ -369,7 +368,7 @@ modalButtons.forEach(btn => {
             return;
         }
 
-        // If logged in → allow modal to open normally
+
         openModal(target);
     });
 });
@@ -406,7 +405,7 @@ if (window.__authError) {
     window.__authError = null;
 }
 
-/* NOTE: clicking outside the modal no longer closes it — user must press the X */
+
 
 /* ============================================================
    LOAD USER DATA FOR BOOKING FORMS

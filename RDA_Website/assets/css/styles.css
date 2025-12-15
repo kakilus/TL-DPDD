@@ -198,7 +198,7 @@ h2 {
     background: var(--green-700);
 }
 
-/* Mobile Hamburger */
+
 .hamburger {
     width: 32px;
     height: 32px;
@@ -423,11 +423,11 @@ h2 {
     padding-bottom: 16px;
     overflow: hidden;
 
-    /* NEW – centers content and button */
+    
     display: flex;
     flex-direction: column;
-    align-items: center;      /* horizontal centering */
-    text-align: center;       /* center text */
+    align-items: center;      
+    text-align: center;       
 }
 
 .loyalty-card.featured {
@@ -439,7 +439,7 @@ h2 {
     padding: 24px;
     color: white;
     text-align: center;
-    width: 100%; /* keeps header full width */
+    width: 100%; 
 }
 
 .bronze {
@@ -461,7 +461,7 @@ h2 {
 
 .loyalty-card ul {
     padding: 16px 24px;
-    text-align: left; /* keeps the list aligned properly */
+    text-align: left; 
 }
 
 .loyalty-card li {
@@ -470,7 +470,7 @@ h2 {
     list-style: "✔️ ";
 }
 
-/* NEW – ensures button is centered */
+
 .loyalty-card .btn {
     margin-top: 20px;
     display: block;
@@ -550,7 +550,7 @@ h2 {
         display: flex;
     }
 
-    /* Show the second header row on small screens */
+    
     .header-row-2 {
         display: flex;
         justify-content: space-between;
@@ -659,7 +659,7 @@ h2 {
     color: var(--gray-600);
 }
 
-/* ensure buttons in modal forms appear after inputs, full width where appropriate */
+
 .modal-content .btn {
     margin-top: 6px;
 }
@@ -1031,7 +1031,6 @@ body.accessibility-high-contrast .loyalty-card li {
     background: #c82333;
 }
 
-/* Larger Text */
 body.accessibility-larger-text {
     font-size: 18px;
     line-height: 1.8;
@@ -1042,26 +1041,24 @@ body.accessibility-larger-text h2 { font-size: 2.6rem; }
 body.accessibility-larger-text h3 { font-size: 1.8rem; }
 body.accessibility-larger-text .btn { padding: 14px 28px; font-size: 1.1rem; }
 
-/* Dyslexia-Friendly Font */
+
 body.accessibility-dyslexia-font {
     font-family: 'Opendyslexic', 'OpenDyslexic', sans-serif, system-ui;
 }
 
-/* Reduce Motion */
+
 body.accessibility-reduce-motion * {
     animation: none !important;
     transition: none !important;
 }
 
-/* Enhanced Focus Indicators */
+
 body.accessibility-focus-indicators *:focus {
     outline: 4px dashed var(--yellow-400) !important;
     outline-offset: 3px !important;
 }
 
-/* Mobile adjustments handled earlier */
 
-/* When a modal is open, lock body scrolling */
 body.modal-open {
     overflow: hidden;
 }
