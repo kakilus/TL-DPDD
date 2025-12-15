@@ -1,5 +1,5 @@
 -- RDA_Website schema for MySQL (phpMyAdmin import)
--- Generated manually to mirror SQLite schema in createDatabase.php
+
 
 SET FOREIGN_KEY_CHECKS = 0;
 
