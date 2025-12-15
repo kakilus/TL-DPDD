@@ -371,7 +371,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['admin_fetch_stats'])) {
     try {
         $currentMonth = date('Y-m');
         
-        // Volume: count bookings per day this month
+        //  count bookings per day this month
         // Query hotel and visit tables separately and merge in PHP for robustness
         $hotelVolStmt = $db->prepare("SELECT DATE(created_at) as day, COUNT(*) as count FROM hotel_bookings WHERE DATE_FORMAT(created_at, '%Y-%m') = :month GROUP BY day ORDER BY day");
         $hotelVolStmt->execute([':month' => $currentMonth]);
@@ -391,7 +391,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['admin_fetch_stats'])) {
         $volumeData = [];
         foreach ($volMap as $day => $count) { $volumeData[] = ['day' => $day, 'count' => $count]; }
 
-        // Revenue: sum totals per day this month
+        //  sum totals per day this month
         $hotelRevStmt = $db->prepare("SELECT DATE(created_at) as day, SUM(total_price) as revenue FROM hotel_bookings WHERE DATE_FORMAT(created_at, '%Y-%m') = :month GROUP BY day ORDER BY day");
         $hotelRevStmt->execute([':month' => $currentMonth]);
         $hotelRev = $hotelRevStmt->fetchAll(PDO::FETCH_ASSOC);
